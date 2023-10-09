@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const supplierSchema = new mongoose.Schema({
+const branchSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,18 +10,26 @@ const supplierSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  company: {
+  branchName: {
     type: String,
     trim: true,
     unique: true,
     required: true,
   },
-  managerName: {
+  sector: {
+    type: String,
+    trim: true,
+  },
+  address: {
+    type: String,
+    trim: true,
+  },
+  ContactSurname: {
     type: String,
     trim: true,
     required: true,
   },
-  managerSurname: {
+  ContactName: {
     type: String,
     trim: true,
     required: true,
@@ -91,4 +99,4 @@ const supplierSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Supplier', supplierSchema);
+module.exports = mongoose.model('Branch', branchSchema);

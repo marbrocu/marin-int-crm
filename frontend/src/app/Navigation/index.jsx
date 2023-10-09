@@ -21,16 +21,26 @@ import {
   FileOutlined,
 } from '@ant-design/icons';
 
-const SIDEBAR_MENU = [
+const SIDEBAR_MENU_REL = [
   { key: '/', icon: <DashboardOutlined />, title: 'Dashboard' },
+];
+
+const SIDEBAR_MENU_IRREL = [
+
   { key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
   { key: '/offer', icon: <FileOutlined />, title: 'Offer' },
-  { key: '/customer', icon: <CustomerServiceOutlined />, title: 'Customer' },
   { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
   { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },
-  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
-  { key: '/employee', icon: <UserOutlined />, title: 'Employee' },
-  { key: '/admin', icon: <TeamOutlined />, title: 'Admin' },
+  {key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
+  { key: '/admin', icon: <UserOutlined />, title: 'Admin' },
+  
+];
+
+const PERSONAS_SUBMENU = [
+  { key: '/employee', icon: <TeamOutlined />, title: 'Employee' },
+  { key: '/customer', icon: <CustomerServiceOutlined />, title: 'Customer' },
+  { key: '/supplier', icon: <UserAddOutlined />, title: 'Supplier' },
+  { key: '/branch', icon: <UserAddOutlined />, title: 'Branches' },
 ];
 
 const SETTINGS_SUBMENU = [
@@ -104,7 +114,22 @@ function Sidebar({ collapsible }) {
           )}
         </div>
         <Menu mode="inline" selectedKeys={[currentPath]}>
-          {SIDEBAR_MENU.map((menuItem) => (
+          {SIDEBAR_MENU_REL.map((menuItem) => (
+            <Menu.Item key={menuItem.key} icon={menuItem.icon}>
+              <Link to={menuItem.key} />
+              {menuItem.title}
+            </Menu.Item>
+          ))}
+          <SubMenu key={'Personas'} icon={<UserOutlined />} title={'Personas'}>
+            {PERSONAS_SUBMENU.map((menuItem) => (
+              <Menu.Item key={menuItem.key}>
+                <Link to={menuItem.key} />
+                {menuItem.title}
+              </Menu.Item>
+            ))}
+          </SubMenu>
+          
+          {SIDEBAR_MENU_IRREL.map((menuItem) => (
             <Menu.Item key={menuItem.key} icon={menuItem.icon}>
               <Link to={menuItem.key} />
               {menuItem.title}

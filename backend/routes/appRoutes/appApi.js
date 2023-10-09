@@ -13,6 +13,7 @@ const itemController = require('@/controllers/appControllers/itemController');
 const quoteController = require('@/controllers/appControllers/quoteController');
 const supplierController = require('@/controllers/appControllers/supplierController');
 const supplierOrderController = require('@/controllers/appControllers/supplierOrderController');
+const branchController = require('@/controllers/appControllers/branchController');
 const expenseController = require('@/controllers/appControllers/expenseController');
 const expenseCategoryController = require('@/controllers/appControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/appControllers/paymentInvoiceController');
@@ -109,6 +110,15 @@ router.route('/supplierOrder/delete/:id').delete(catchErrors(supplierOrderContro
 router.route('/supplierOrder/search').get(catchErrors(supplierOrderController.search));
 router.route('/supplierOrder/list').get(catchErrors(supplierOrderController.list));
 router.route('/supplierOrder/filter').get(catchErrors(supplierOrderController.filter));
+
+// //___________________________________________ API for branches _____________________
+router.route('/branch/create').post(catchErrors(branchController.create));
+router.route('/branch/read/:id').get(catchErrors(branchController.read));
+router.route('/branch/update/:id').patch(catchErrors(branchController.update));
+router.route('/branch/delete/:id').delete(catchErrors(branchController.delete));
+router.route('/branch/search').get(catchErrors(branchController.search));
+router.route('/branch/list').get(catchErrors(branchController.list));
+router.route('/branch/filter').get(catchErrors(branchController.filter));
 
 // //_________________________________________________________________API for expenses_____________________
 

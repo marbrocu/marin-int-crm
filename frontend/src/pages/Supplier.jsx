@@ -1,16 +1,15 @@
 import React from 'react';
 
 import CrudModule from '@/modules/CrudModule';
-import CustomerForm from '@/forms/CustomerForm';
+import SupplierForm from '@/forms/SupplierForm';
 
-function Customer() {
-  const entity = 'client';
+function Supplier() {
+  const entity = 'supplier';
   const searchConfig = {
     displayLabels: ['company'],
     searchFields: 'company,managerSurname,managerName',
     outputValue: '_id',
   };
-
   const entityDisplayLabels = ['company'];
 
   const readColumns = [
@@ -41,11 +40,11 @@ function Customer() {
       dataIndex: 'company',
     },
     {
-      title: 'Surname',
+      title: 'Manager Surname',
       dataIndex: 'managerSurname',
     },
     {
-      title: 'Name',
+      title: 'Manager Name',
       dataIndex: 'managerName',
     },
     {
@@ -54,12 +53,12 @@ function Customer() {
     },
   ];
 
-  const ADD_NEW_ENTITY = 'Add new customer';
-  const DATATABLE_TITLE = 'Customers List';
-  const ENTITY_NAME = 'customer';
-  const CREATE_ENTITY = 'Create customer';
-  const UPDATE_ENTITY = 'Update customer';
-  const PANEL_TITLE = 'Customer Panel';
+  const ADD_NEW_ENTITY = 'Add new supplier';
+  const DATATABLE_TITLE = 'Suppliers List';
+  const ENTITY_NAME = 'supplier';
+  const CREATE_ENTITY = 'Create supplier';
+  const UPDATE_ENTITY = 'Update supplier';
+  const PANEL_TITLE = 'Supplier Panel';
 
   const config = {
     entity,
@@ -76,11 +75,11 @@ function Customer() {
   };
   return (
     <CrudModule
-      createForm={<CustomerForm />}
-      updateForm={<CustomerForm isUpdateForm={true} />}
+      createForm={<SupplierForm />}
+      updateForm={<SupplierForm isUpdateForm={true} />}
       config={config}
     />
   );
 }
 
-export default Customer;
+export default Supplier;
