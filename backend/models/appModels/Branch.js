@@ -16,7 +16,16 @@ const branchSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  companyName: {
+    type: String,
+    trim: true,
+    required: true,
+  },
   sector: {
+    type: String,
+    trim: true,
+  },
+  type: {
     type: String,
     trim: true,
   },

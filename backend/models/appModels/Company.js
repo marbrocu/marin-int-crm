@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const supplierSchema = new mongoose.Schema({
+const companySchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
@@ -10,22 +10,13 @@ const supplierSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  branch: {
-    type: mongoose.Schema.ObjectId,
-    ref: 'Branch',
-    required: true,
-    autopopulate: true,
-  },
-  name: {
+  companyName: {
     type: String,
     trim: true,
+    unique: true,
     required: true,
   },
-  surname: {
-    type: String,
-    trim: true,
-    required: true,
-  },
+  
   bankAccount: {
     type: String,
     trim: true,
@@ -65,7 +56,6 @@ const supplierSchema = new mongoose.Schema({
   phone: {
     type: String,
     trim: true,
-    required: true,
   },
   fax: {
     type: String,
@@ -91,5 +81,4 @@ const supplierSchema = new mongoose.Schema({
   },
 });
 
-supplierSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Supplier', supplierSchema);
+module.exports = mongoose.model('Company', companySchema);

@@ -19,19 +19,27 @@ function Branch() {
       dataIndex: 'branchName',
     },
     {
+      title: 'Company Name',
+      dataIndex: 'companyName',
+    },
+    {
       title: 'Sector',
       dataIndex: 'sector',
+    },
+    {
+      title: 'Type',
+      dataIndex: 'type',
     },
     {
       title: 'Address',
       dataIndex: 'address',
     },
     {
-      title: 'Contact Surname',
+      title: 'Manager Surname',
       dataIndex: 'ContactSurname',
     },
     {
-      title: 'Contact Name',
+      title: 'Manager Name',
       dataIndex: 'ContactName',
     },
     {
@@ -49,11 +57,11 @@ function Branch() {
       dataIndex: 'branchName',
     },
     {
-      title: 'Contact Surname',
+      title: 'Manager Surname',
       dataIndex: 'ContactSurname',
     },
     {
-      title: 'Contact Name',
+      title: 'Manager Name',
       dataIndex: 'ContactName',
     },
     {

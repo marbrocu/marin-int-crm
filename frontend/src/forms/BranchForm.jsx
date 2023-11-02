@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button, Form, Select,Input } from 'antd';
 import { validatePhoneNumber } from '@/utils/helpers';
+import AutoCompleteAsync from '@/components/AutoCompleteAsync';
+import { combineReducers } from 'redux';
 
-export default function BranchrForm({ isUpdateForm = false }) {
+export default function BranchForm({ isUpdateForm = false }) {
   const validateEmptyString = (_, value) => {
     if (value && value.trim() === '') {
       return Promise.reject(new Error('Field cannot be empty'));
@@ -30,6 +32,24 @@ export default function BranchrForm({ isUpdateForm = false }) {
         <Input />
       </Form.Item>
       <Form.Item
+            label="Company Name"
+            name="companyName"
+            rules={[
+              {
+                required: true,
+                message: 'Please input the company!',
+              },
+            ]}
+          >
+            <AutoCompleteAsync
+              entity={'company'}
+              displayLabels={['companyName']}
+              searchFields={'companyName'}
+              outputValue={'companyName'}
+              // onUpdateValue={autoCompleteUpdate}
+            />
+          </Form.Item>
+      <Form.Item
         name="sector"
         label="Sector Name"
         rules={[
@@ -37,11 +57,35 @@ export default function BranchrForm({ isUpdateForm = false }) {
             required: true,
           },
         ]}
+        style={{
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingRight: '5px',
+        }}
       >
         <Select>
           <Select.Option value="norte">Norte</Select.Option>
           <Select.Option value="sur">Sur</Select.Option>
           <Select.Option value="centro">Centro</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item
+        name="type"
+        label="Branch Type"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+        style={{
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingRight: '5px',
+        }}
+      >
+        <Select>
+          <Select.Option value="supplier">Supplier</Select.Option>
+          <Select.Option value="client">Client</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item

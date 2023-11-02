@@ -49,6 +49,10 @@ export const routesConfig = [
     component: 'Branch',
   },
   {
+    path: '/Company',
+    component: 'Company',
+  },
+  {
     path: '/invoice',
     component: 'Invoice/index',
   },

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, Input } from 'antd';
+import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 import { validatePhoneNumber } from '@/utils/helpers';
 
 export default function SupplierForm({ isUpdateForm = false }) {
@@ -14,28 +15,30 @@ export default function SupplierForm({ isUpdateForm = false }) {
   return (
     <>
       <Form.Item
-        label="Company Name"
-        name="company"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your company name!',
-          },
-          {
-            validator: validateEmptyString,
-            message: 'Please input valid value!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+            label="Branch Name"
+            name="branch"
+            rules={[
+              {
+                required: true,
+                message: 'Please input the branch!',
+              },
+            ]}
+          >
+            <AutoCompleteAsync
+              entity={'branch'}
+              displayLabels={['branchName']}
+              searchFields={'branchName'}
+              // outputValue={'branchName'}
+              // onUpdateValue={autoCompleteUpdate}
+            />
+          </Form.Item>
       <Form.Item
         label="Surname"
-        name="managerSurname"
+        name="surname"
         rules={[
           {
             required: true,
-            message: 'Please input your surname!',
+            message: 'Please input the surname!',
           },
           {
             validator: validateEmptyString,
@@ -52,11 +55,11 @@ export default function SupplierForm({ isUpdateForm = false }) {
       </Form.Item>
       <Form.Item
         label="Name"
-        name="managerName"
+        name="name"
         rules={[
           {
             required: true,
-            message: 'Please input your manager name!',
+            message: 'Please input the name!',
           },
           {
             validator: validateEmptyString,

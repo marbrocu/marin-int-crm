@@ -6,25 +6,25 @@ import CustomerForm from '@/forms/CustomerForm';
 function Customer() {
   const entity = 'client';
   const searchConfig = {
-    displayLabels: ['company'],
-    searchFields: 'company,managerSurname,managerName',
+    displayLabels: ['email'],
+    searchFields: 'branch.branchName,Surname,Name,email',
     outputValue: '_id',
   };
 
-  const entityDisplayLabels = ['company'];
+  const entityDisplayLabels = ['email'];
 
   const readColumns = [
     {
-      title: 'Company',
-      dataIndex: 'company',
+      title: 'Branch',
+      dataIndex: 'branch.branchName',
     },
     {
-      title: 'Manager Surname',
-      dataIndex: 'managerSurname',
+      title: 'Surname',
+      dataIndex: 'surname',
     },
     {
-      title: 'Manager Name',
-      dataIndex: 'managerName',
+      title: 'Name',
+      dataIndex: 'name',
     },
     {
       title: 'Email',
@@ -36,17 +36,14 @@ function Customer() {
     },
   ];
   const dataTableColumns = [
-    {
-      title: 'Company',
-      dataIndex: 'company',
-    },
+
     {
       title: 'Surname',
-      dataIndex: 'managerSurname',
+      dataIndex: 'surname',
     },
     {
       title: 'Name',
-      dataIndex: 'managerName',
+      dataIndex: 'name',
     },
     {
       title: 'Email',

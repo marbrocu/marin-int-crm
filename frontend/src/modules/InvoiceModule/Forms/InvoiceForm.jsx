@@ -8,7 +8,7 @@ import { DatePicker } from '@/components/CustomAntd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
-import ItemRow from '@/modules/ErpPanelModule/ItemRow';
+import ItemRow from '@/modules/ErpPanelModule/ItemRowInvoice';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
@@ -58,8 +58,8 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           >
             <AutoCompleteAsync
               entity={'client'}
-              displayLabels={['company']}
-              searchFields={'company'}
+              displayLabels={['email']}
+              searchFields={['company','email']}
               // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
@@ -68,7 +68,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           <Form.Item
             label="Number"
             name="number"
-            initialValue={1}
+            //initialValue={1}
             rules={[
               {
                 required: true,
@@ -76,7 +76,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
               },
             ]}
           >
-            <InputNumber min={1} style={{ width: '100%' }} />
+            <Input style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -104,13 +104,12 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 message: 'Please input invoice status!',
               },
             ]}
-            initialValue={'draft'}
+            initialValue={'requisition'}
           >
             <Select
               options={[
-                { value: 'draft', label: 'Draft' },
-                { value: 'pending', label: 'Pending' },
-                { value: 'sent', label: 'Sent' },
+                { value: 'requisition', label: 'Requisition' },
+                { value: 'quotation', label: 'Quotation' },
               ]}
             ></Select>
           </Form.Item>
@@ -231,7 +230,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 bordered={false}
                 options={[
                   { value: 0, label: 'Tax 0 %' },
-                  { value: 0.19, label: 'Tax 19 %' },
+                  { value: 0.16, label: 'Tax 16 %' },
                 ]}
               ></Select>
             </Form.Item>

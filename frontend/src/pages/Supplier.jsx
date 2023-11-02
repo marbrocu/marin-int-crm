@@ -6,24 +6,24 @@ import SupplierForm from '@/forms/SupplierForm';
 function Supplier() {
   const entity = 'supplier';
   const searchConfig = {
-    displayLabels: ['company'],
-    searchFields: 'company,managerSurname,managerName',
+    displayLabels: ['email'],
+    searchFields: 'branch.branchName, email,surname,name',
     outputValue: '_id',
   };
-  const entityDisplayLabels = ['company'];
+  const entityDisplayLabels = ['email'];
 
   const readColumns = [
     {
-      title: 'Company',
-      dataIndex: 'company',
+      title: 'Branch',
+      dataIndex: 'branch.branchName',
     },
     {
-      title: 'Manager Surname',
-      dataIndex: 'managerSurname',
+      title: 'Surname',
+      dataIndex: 'surname',
     },
     {
-      title: 'Manager Name',
-      dataIndex: 'managerName',
+      title: 'Name',
+      dataIndex: 'name',
     },
     {
       title: 'Email',
@@ -35,17 +35,14 @@ function Supplier() {
     },
   ];
   const dataTableColumns = [
+
     {
-      title: 'Company',
-      dataIndex: 'company',
+      title: 'Surname',
+      dataIndex: 'surname',
     },
     {
-      title: 'Manager Surname',
-      dataIndex: 'managerSurname',
-    },
-    {
-      title: 'Manager Name',
-      dataIndex: 'managerName',
+      title: 'Name',
+      dataIndex: 'name',
     },
     {
       title: 'Email',
