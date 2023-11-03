@@ -42,10 +42,11 @@ const PERSONAS_SUBMENU = [
 
 const QUOTES_SUBMENU = [
   { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
-  { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },
+  { key: '/invoice/expired', icon: <FileSyncOutlined />, title: 'Expired' },
 ];
 
 const PURCHASE_SUBMENU = [
+  { key: '/quote', icon: <FileOutlined />, title: 'Quotation' },
   { key: '/offer', icon: <FileOutlined />, title: 'Offer' },
   { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
 ];

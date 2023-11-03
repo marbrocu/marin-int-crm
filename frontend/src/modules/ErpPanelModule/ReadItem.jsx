@@ -222,10 +222,15 @@ export default function ReadItem({ config, selectedItem }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Descriptions title={`Client : ${currentErp.client.company}`}>
-        <Descriptions.Item label="Address">{currentErp.client.address}</Descriptions.Item>
+      <Descriptions title={`Client : ${currentErp.client.branch.branchName}`}>
+        <Descriptions.Item label="Address">{currentErp.client.branch.address}</Descriptions.Item>
         <Descriptions.Item label="E-mail">{currentErp.client.email}</Descriptions.Item>
         <Descriptions.Item label="Phone">{currentErp.client.phone}</Descriptions.Item>
+      </Descriptions>
+      <Descriptions title={`Supplier : ${currentErp.supplier.branch.branchName}`}>
+        <Descriptions.Item label="Address">{currentErp.supplier.branch.address}</Descriptions.Item>
+        <Descriptions.Item label="E-mail">{currentErp.supplier.email}</Descriptions.Item>
+        <Descriptions.Item label="Phone">{currentErp.supplier.phone}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row gutter={[12, 0]}>

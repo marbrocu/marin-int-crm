@@ -32,6 +32,20 @@ const invoiceSchema = new mongoose.Schema({
     required: true,
     autopopulate: true,
   },
+  supplier: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Supplier',
+    required: true,
+    autopopulate: true,
+  },
+  requisitionfile: {
+    type: String,
+    required: false,
+  },
+  quotationfile: {
+    type: String,
+    required: false,
+  },
   items: [
     {
       itemName: {
@@ -78,16 +92,6 @@ const invoiceSchema = new mongoose.Schema({
   discount: {
     type: Number,
     default: 0,
-  },
-  paymentInvoice: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'PaymentInvoice',
-    },
-  ],
-  paymentStatus: {
-    type: String,
-    default: 'unpaid',
   },
   note: {
     type: String,

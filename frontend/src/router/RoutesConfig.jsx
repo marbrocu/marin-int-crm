@@ -57,6 +57,10 @@ export const routesConfig = [
     component: 'Invoice/index',
   },
   {
+    path: '/invoice/expired',
+    component: 'Invoice/InvoiceExpired',
+  },
+  {
     path: '/invoice/create',
     component: 'Invoice/InvoiceCreate',
   },

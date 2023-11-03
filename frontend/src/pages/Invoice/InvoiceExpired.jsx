@@ -2,9 +2,10 @@ import dayjs from 'dayjs';
 import { Tag } from 'antd';
 import configPage from './config';
 import { useMoney } from '@/settings';
-import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule';
+import InvoiceDataTableModule from '@/modules/InvoiceModule/InvoiceDataTableModule/expiredIndex';
 
-export default function Invoice() {
+
+export default function InvoiceExpired() {
   const { moneyRowFormatter } = useMoney();
 
   const searchConfig = {

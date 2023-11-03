@@ -8,6 +8,7 @@ const search = require('./search');
 const filter = require('./filter');
 const listAll = require('./listAll');
 const paginatedList = require('./paginatedList');
+const paginatedListExpired = require('./paginatedListExpired');
 
 const createCRUDController = (modelName) => {
   const Model = mongoose.model(modelName);
@@ -26,7 +27,12 @@ const createCRUDController = (modelName) => {
     remove(Model, req, res);
   };
   crudMethods.list = async (req, res) => {
+    console.log("passing")
     paginatedList(Model, req, res);
+  };
+  crudMethods.listExpired = async (req, res) => {
+    console.log("expassing")
+    paginatedListExpired(Model, req, res);
   };
   crudMethods.listAll = async (req, res) => {
     listAll(Model, req, res);

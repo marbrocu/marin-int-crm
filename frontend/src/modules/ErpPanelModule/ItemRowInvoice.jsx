@@ -60,7 +60,7 @@ export default function ItemRowInvoice({ field, remove, current = null }) {
           rules={[
             {
               required: true,
-              message: 'Missing itemName name',
+              message: 'Missing item Name',
             },
             {
               pattern: /^(?!\s*$)[\s\S]+$/, // Regular expression to allow spaces, alphanumeric, and special characters, but not just spaces

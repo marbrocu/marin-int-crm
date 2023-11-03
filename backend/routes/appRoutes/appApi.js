@@ -66,6 +66,7 @@ router.route('/invoice/update/:id').patch(catchErrors(invoiceController.update))
 router.route('/invoice/delete/:id').delete(catchErrors(invoiceController.delete));
 router.route('/invoice/search').get(catchErrors(invoiceController.search));
 router.route('/invoice/list').get(catchErrors(invoiceController.list));
+router.route('/invoice/listExpired').get(catchErrors(invoiceController.listExpired));
 router.route('/invoice/filter').get(catchErrors(invoiceController.filter));
 router.route('/invoice/pdf/:id').get(catchErrors(invoiceController.generatePDF));
 router.route('/invoice/summary').get(catchErrors(invoiceController.summary));
