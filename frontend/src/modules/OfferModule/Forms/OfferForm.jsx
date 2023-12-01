@@ -47,26 +47,26 @@ export default function OfferForm({ subTotal = 0, current = null }) {
       <Row gutter={[12, 0]}>
         <Col className="gutter-row" span={9}>
           <Form.Item
-            name="lead"
-            label="Lead"
+            name="quote"
+            label="Purchase Order Number"
             rules={[
               {
                 required: true,
-                message: 'Please input your client!',
+                message: 'Please input your Purchas Order Number!',
               },
             ]}
           >
             <AutoCompleteAsync
-              entity={'lead'}
-              displayLabels={['company']}
-              searchFields={'company'}
+              entity={'client'}
+              displayLabels={['email']}
+              searchFields={'email'}
               // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="Number"
+            label="Confirmation Number"
             name="number"
             initialValue={1}
             rules={[
@@ -96,7 +96,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="status"
+            label="Shipment status"
             name="status"
             rules={[
               {
@@ -104,14 +104,13 @@ export default function OfferForm({ subTotal = 0, current = null }) {
                 message: 'Please input quote status!',
               },
             ]}
-            initialValue={'draft'}
+            initialValue={'client'}
           >
             <Select
               options={[
-                { value: 'draft', label: 'Draft' },
+                { value: 'client', label: 'Client' },
                 { value: 'pending', label: 'Pending' },
                 { value: 'sent', label: 'Sent' },
-                { value: 'accepted', label: 'Accepted' },
               ]}
             ></Select>
           </Form.Item>
@@ -124,7 +123,7 @@ export default function OfferForm({ subTotal = 0, current = null }) {
         <Col className="gutter-row" span={8}>
           <Form.Item
             name="date"
-            label="Date"
+            label="Confirmation Date"
             rules={[
               {
                 required: true,
@@ -138,8 +137,51 @@ export default function OfferForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={7}>
           <Form.Item
-            name="expiredDate"
-            label="Expire Date"
+            name="expiredDatePayment"
+            label="Expire Date Payment"
+            rules={[
+              {
+                required: true,
+                type: 'object',
+              },
+            ]}
+            initialValue={dayjs().add(30, 'days')}
+          >
+            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={[12, 0]}>
+      <Col className="gutter-row" span={9}>
+          <Form.Item label="Shipment Cost" name="cost">
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={8}>
+        <Form.Item
+            label="URL Shipment"
+            name="shipmentfile"
+            rules={[
+              {
+                required: false,
+                message: 'Please input a URL for the requisition file!',
+              },
+              {
+                type: 'string', // Define the type of input expected
+                pattern: new RegExp(
+                  '^(https?://)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.([a-z]+)?$'
+                ), // Define the regular expression for URL validation
+                message: 'Please enter a valid URL', // Error message to display if the URL is invalid
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={7}>
+          <Form.Item
+            name="expiredDateShipment"
+            label="Expire Date Shipment"
             rules={[
               {
                 required: true,

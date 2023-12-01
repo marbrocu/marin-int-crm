@@ -1,13 +1,13 @@
 const entity = 'offer';
 
 const Labels = {
-  PANEL_TITLE: 'Offer',
-  dataTableTitle: 'Offer Lists',
-  ADD_NEW_ENTITY: 'Add New Offer',
-  DATATABLE_TITLE: 'Offer List',
-  ENTITY_NAME: 'Offer',
-  CREATE_ENTITY: 'Save Offer',
-  UPDATE_ENTITY: 'Update Offer',
+  PANEL_TITLE: 'Confirmation',
+  dataTableTitle: 'Confirmation Lists',
+  ADD_NEW_ENTITY: 'Add New Confirmation',
+  DATATABLE_TITLE: 'Confirmation List',
+  ENTITY_NAME: 'Confirmation',
+  CREATE_ENTITY: 'Save Confirmation',
+  UPDATE_ENTITY: 'Update Confirmation',
 };
 
 const configPage = {

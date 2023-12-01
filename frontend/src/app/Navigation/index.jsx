@@ -46,9 +46,9 @@ const QUOTES_SUBMENU = [
 ];
 
 const PURCHASE_SUBMENU = [
-  { key: '/quote', icon: <FileOutlined />, title: 'Quotation' },
-  { key: '/offer', icon: <FileOutlined />, title: 'Offer' },
-  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
+  { key: '/quote', icon: <FileOutlined />, title: 'Order' },
+  { key: '/offer', icon: <FileOutlined />, title: 'Confirmation' },
+  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payments' },
 ];
 
 const SETTINGS_SUBMENU = [

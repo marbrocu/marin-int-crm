@@ -9,6 +9,7 @@ import { DatePicker } from '@/components/CustomAntd';
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
+import QuoteRow from '@/modules/ErpPanelModule/QuoteRow';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
@@ -58,8 +59,8 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
           >
             <AutoCompleteAsync
               entity={'client'}
-              displayLabels={['company']}
-              searchFields={'company'}
+              displayLabels={['email']}
+              searchFields={'email'}
               // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
@@ -72,7 +73,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: 'Please input quote number!',
+                message: 'Please input purchase number!',
               },
             ]}
           >
@@ -87,7 +88,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: 'Please input quote year!',
+                message: 'Please input purchase year!',
               },
             ]}
           >
@@ -152,6 +153,58 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
           </Form.Item>
         </Col>
       </Row>
+      <Row>
+      <Form.Item
+        name="shipment"
+        label="Shipment Type"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+        style={{
+          display: 'inline-block',
+          width: 'calc(50%)',
+          paddingRight: '5px',
+        }}
+      >
+        <Select>
+          <Select.Option value="included">Included</Select.Option>
+          <Select.Option value="client">By client</Select.Option>
+        </Select>
+      </Form.Item>
+      </Row>
+      <Divider dashed />
+      <Row gutter={[12, 12]} style={{ position: 'relative' }}>
+        <Col className="gutter-row" span={5}>
+          <p>Quotes</p>
+        </Col>
+      </Row>
+      <Form.List name="quotes">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map((field) => (
+              <QuoteRow
+                key={field.key}
+                remove={() => remove(field.name)}
+                field={field}
+                current={current}
+              />
+            ))}
+            <Form.Item>
+              <Button
+                type="dashed"
+                onClick={() => add()}
+                block
+                icon={<PlusOutlined />}
+                ref={addField}
+              >
+                Add field
+              </Button>
+            </Form.Item>
+          </>
+        )}
+      </Form.List>
       <Divider dashed />
       <Row gutter={[12, 12]} style={{ position: 'relative' }}>
         <Col className="gutter-row" span={5}>
@@ -196,7 +249,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
           <Col className="gutter-row" span={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
-                Save Quote
+                Save Purchase Order
               </Button>
             </Form.Item>
           </Col>
