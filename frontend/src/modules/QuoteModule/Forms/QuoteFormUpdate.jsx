@@ -10,13 +10,11 @@ import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
 import ItemRow from '@/modules/ErpPanelModule/ItemRow';
 
-import QuoteRow from '@/modules/ErpPanelModule/QuoteRow';
-
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 import calculate from '@/utils/calculate';
 
-export default function QuoteForm({ subTotal = 0, current = null }) {
+export default function QuoteFormUpdate({ subTotal = 0, current = null }) {
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
@@ -47,19 +45,38 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
   return (
     <>
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" span={9}>
           <Form.Item
-            label="Number"
-            name="number"
-            //initialValue={1}
+            name="client"
+            label="Client"
             rules={[
               {
                 required: true,
-                message: 'Please input quote number!',
+                message: 'Please input your client!',
               },
             ]}
           >
-            <InputNumber min={1} style={{ width: '100%' }} />
+            <AutoCompleteAsync
+              entity={'client'}
+              displayLabels={['email']}
+              searchFields={['company', 'email']}
+              // onUpdateValue={autoCompleteUpdate}
+            />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={5}>
+          <Form.Item
+            label="Invoice Number"
+            name="number"
+            //initialValue={1}
+            rules={[
+              ({ getFieldValue }) => ({
+                required: getFieldValue('status') === 'quotation',
+                message: 'Please input invoice number!',
+              }),
+            ]}
+          >
+            <Input style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -70,7 +87,7 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: 'Please input quote year!',
+                message: 'Please input invoice year!',
               },
             ]}
           >
@@ -79,27 +96,41 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            name="shipment"
-            label="Shipment Type"
+            label="status"
+            name="status"
             rules={[
               {
-                required: true,
-                message: 'Please input shipment status!',
+                required: false,
+                message: 'Please input invoice status!',
               },
             ]}
-            //initialValue={'draft'}
+            initialValue={'requisition'}
           >
             <Select
               options={[
-                { value: 'included', label: 'Included' },
-                { value: 'client', label: 'By client' },
+                { value: 'requisition', label: 'Requisition' },
+                { value: 'quotation', label: 'Quotation' },
               ]}
             ></Select>
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={9}>
-          <Form.Item label="Note" name="note">
-            <Input />
+          <Form.Item
+            name="supplier"
+            label="Supplier"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your supplier!',
+              },
+            ]}
+          >
+            <AutoCompleteAsync
+              entity={'supplier'}
+              displayLabels={['email']}
+              searchFields={['company', 'email']}
+              // onUpdateValue={autoCompleteUpdate}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8}>
@@ -132,13 +163,20 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
             <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={9}>
+      </Row>
+      <Row gutter={[12, 0]}>
+        <Col className="gutter-row" span = {12}>
+          <Form.Item label="Note" name="note">
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={12}>
           <Form.Item
             label="URL Purchase"
             name="purchasefile"
             rules={[
               {
-                required: false,
+                required: true,
                 message: 'Please input a URL for the purchase file!',
               },
               {
@@ -158,19 +196,26 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
       <Divider dashed />
       <Row gutter={[12, 12]} style={{ position: 'relative' }}>
         <Col className="gutter-row" span={5}>
-          <p>Quotes</p>
+          <p>Item</p>
+        </Col>
+        <Col className="gutter-row" span={7}>
+          <p>Description</p>
+        </Col>
+        <Col className="gutter-row" span={3}>
+          <p>Quantity</p>
+        </Col>
+        <Col className="gutter-row" span={4}>
+          <p>Price</p>
+        </Col>
+        <Col className="gutter-row" span={5}>
+          <p>Total</p>
         </Col>
       </Row>
-      <Form.List name="quotes">
+      <Form.List name="items">
         {(fields, { add, remove }) => (
           <>
             {fields.map((field) => (
-              <QuoteRow
-                key={field.key}
-                remove={() => remove(field.name)}
-                field={field}
-                current={current}
-              />
+              <ItemRow key={field.key} remove={remove} field={field} current={current}></ItemRow>
             ))}
             <Form.Item>
               <Button
@@ -187,16 +232,69 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
         )}
       </Form.List>
       <Divider dashed />
-
-      <Divider dashed />
       <div style={{ position: 'relative', width: ' 100%', float: 'right' }}>
         <Row gutter={[12, -5]}>
           <Col className="gutter-row" span={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
-                Save Quote
+                Save Invoice
               </Button>
             </Form.Item>
+          </Col>
+          <Col className="gutter-row" span={4} offset={10}>
+            <p
+              style={{
+                paddingLeft: '12px',
+                paddingTop: '5px',
+              }}
+            >
+              Sub Total :
+            </p>
+          </Col>
+          <Col className="gutter-row" span={5}>
+            <MoneyInputFormItem readOnly value={subTotal} />
+          </Col>
+        </Row>
+        <Row gutter={[12, -5]}>
+          <Col className="gutter-row" span={4} offset={15}>
+            <Form.Item
+              name="taxRate"
+              rules={[
+                {
+                  required: false,
+                  message: 'Please input your taxRate!',
+                },
+              ]}
+              initialValue="0"
+            >
+              <Select
+                value={taxRate}
+                onChange={handelTaxChange}
+                bordered={false}
+                options={[
+                  { value: 0, label: 'Tax 0 %' },
+                  { value: 0.16, label: 'Tax 16 %' },
+                ]}
+              ></Select>
+            </Form.Item>
+          </Col>
+          <Col className="gutter-row" span={5}>
+            <MoneyInputFormItem readOnly value={taxTotal} />
+          </Col>
+        </Row>
+        <Row gutter={[12, -5]}>
+          <Col className="gutter-row" span={4} offset={15}>
+            <p
+              style={{
+                paddingLeft: '12px',
+                paddingTop: '5px',
+              }}
+            >
+              Total :
+            </p>
+          </Col>
+          <Col className="gutter-row" span={5}>
+            <MoneyInputFormItem readOnly value={total} />
           </Col>
         </Row>
       </div>

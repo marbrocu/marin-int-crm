@@ -82,7 +82,7 @@ export default function ItemRow({ field, remove, current = null }) {
           fieldKey={[field.fieldKey, 'quantity']}
           rules={[{ required: true, message: 'Missing item quantity' }]}
         >
-          <InputNumber style={{ width: '100%' }} min={0} onChange={updateQt} />
+          <InputNumber style={{ width: '100%' }} min={1} onChange={updateQt} />
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={4}>
@@ -94,7 +94,7 @@ export default function ItemRow({ field, remove, current = null }) {
           <InputNumber
             className="moneyInput"
             onChange={updatePrice}
-            min={0}
+            min={1}
             controls={false}
             addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
             addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}

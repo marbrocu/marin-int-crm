@@ -32,6 +32,23 @@ const quoteSchema = new mongoose.Schema({
     required: true,
     autopopulate: true,
   },
+  supplier: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Supplier',
+    required: true,
+    autopopulate: true,
+  },
+  purchasefile: {
+    type: String,
+    required: false,
+  },
+  frominvoices:[{
+    invoiceNumber: {
+      type: String,
+      required: true,
+    },
+  }
+  ],
   items: [
     {
       itemName: {
@@ -44,6 +61,10 @@ const quoteSchema = new mongoose.Schema({
       quantity: {
         type: Number,
         required: true,
+      },
+      available: {
+        type: Number,
+        required: false,
       },
       price: {
         type: Number,

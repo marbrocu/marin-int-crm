@@ -59,6 +59,10 @@ const invoiceSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
+      available: {
+        type: Number,
+        required: false,
+      },
       price: {
         type: Number,
         required: true,
