@@ -43,6 +43,29 @@ const update = async (req, res) => {
     body['pdfPath'] = 'quote-' + req.params.id + '.pdf';
     // Find document by id and updates with the required fields
 
+    const availableItemsarray = items.some((item) => {
+      let totalAvailable = 0; // Initialize the total available quantity for the current item
+    
+      item.available.forEach((avail) => {
+        const values = Object.values(avail);
+        if (values.length > 0) {
+          const availValue = values[0]; // Safely access the first value if available
+          totalAvailable += availValue; // Accumulate the available quantities
+        }
+      });
+    
+      // Compare the total available quantity with the item's quantity
+      return totalAvailable > item.quantity;
+    });
+    
+    if (availableItemsarray) {
+      return res.status(409).json({
+        success: false,
+        result: null,
+        message: 'Some items in confirmation have more than the quantity.',
+      });
+    }
+
     const result = await Model.findOneAndUpdate({ _id: req.params.id, removed: false }, body, {
       new: true, // return the new result instead of the old one
     }).exec();

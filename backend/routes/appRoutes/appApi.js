@@ -11,6 +11,7 @@ const leadController = require('@/controllers/appControllers/leadController');
 const invoiceController = require('@/controllers/appControllers/invoiceController');
 const itemController = require('@/controllers/appControllers/itemController');
 const quoteController = require('@/controllers/appControllers/quoteController');
+const confirmationController = require('@/controllers/appControllers/confirmationController');
 const supplierController = require('@/controllers/appControllers/supplierController');
 const supplierOrderController = require('@/controllers/appControllers/supplierOrderController');
 const branchController = require('@/controllers/appControllers/branchController/branchController');
@@ -94,6 +95,20 @@ router.route('/quote/pdf/:id').get(catchErrors(quoteController.generatePDF));
 router.route('/quote/summary').get(catchErrors(quoteController.summary));
 router.route('/quote/convert/:id').get(catchErrors(quoteController.convertQuoteToInvoice));
 router.route('/quote/mail').post(catchErrors(quoteController.sendMail));
+
+
+// //_________________________________________________________________API for confirmations_____________________
+router.route('/confirmation/create').post(catchErrors(confirmationController.create));
+router.route('/confirmation/read/:id').get(catchErrors(confirmationController.read));
+router.route('/confirmation/update/:id').patch(catchErrors(confirmationController.update));
+router.route('/confirmation/delete/:id').delete(catchErrors(confirmationController.delete));
+router.route('/confirmation/search').get(catchErrors(confirmationController.search));
+router.route('/confirmation/list').get(catchErrors(confirmationController.list));
+router.route('/confirmation/listExpired').get(catchErrors(confirmationController.listExpired));
+router.route('/confirmation/filter').get(catchErrors(confirmationController.filter));
+router.route('/confirmation/pdf/:id').get(catchErrors(confirmationController.generatePDF));
+router.route('/confirmation/summary').get(catchErrors(confirmationController.summary));
+router.route('/confirmation/mail').post(catchErrors(confirmationController.sendMail));
 
 // //___________________________________________ API for suppliers _____________________
 router.route('/supplier/create').post(catchErrors(supplierController.create));

@@ -8,16 +8,17 @@ import { DatePicker } from '@/components/CustomAntd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
-import ItemRow from '@/modules/ErpPanelModule/ItemRowInvoice';
-
+import ItemRow from '@/modules/ErpPanelModule/ItemRow';
+import { useMoney } from '@/settings';
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
 import calculate from '@/utils/calculate';
 
-export default function InvoiceForm({ subTotal = 0, current = null }) {
+export default function ConfirmationForm({ subTotal = 0, current = null }) {
   const [total, setTotal] = useState(0);
   const [taxRate, setTaxRate] = useState(0);
   const [taxTotal, setTaxTotal] = useState(0);
+  const money = useMoney();
   const [currentYear, setCurrentYear] = useState(() => new Date().getFullYear());
   const handelTaxChange = (value) => {
     setTaxRate(value);
@@ -45,34 +46,15 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
   return (
     <>
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={9}>
-          <Form.Item
-            name="client"
-            label="Client"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your client!',
-              },
-            ]}
-          >
-            <AutoCompleteAsync
-              entity={'client'}
-              displayLabels={['email']}
-              searchFields={['company', 'email']}
-              // onUpdateValue={autoCompleteUpdate}
-            />
-          </Form.Item>
-        </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="Invoice Number"
+            label="Confirmation Number"
             name="number"
             //initialValue={1}
             rules={[
               ({ getFieldValue }) => ({
-                required: getFieldValue('status') === 'quotation',
-                message: 'Please input invoice number!',
+                required: true,
+                message: 'Please input confirmation number!',
               }),
             ]}
           >
@@ -87,7 +69,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: true,
-                message: 'Please input invoice year!',
+                message: 'Please input confirmation year!',
               },
             ]}
           >
@@ -101,39 +83,21 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             rules={[
               {
                 required: false,
-                message: 'Please input invoice status!',
+                message: 'Please input confirmation status!',
               },
             ]}
-            initialValue={'quotation'}
+            initialValue={'pending'}
           >
             <Select
               options={[
-                { value: 'requisition', label: 'Requisition' },
-                { value: 'quotation', label: 'Quotation' },
+                { value: 'pending', label: 'Pending' },
+                { value: 'sent', label: 'Sent' },
+                { value: 'received', label: 'Received' },
               ]}
             ></Select>
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={9}>
-          <Form.Item
-            name="supplier"
-            label="Supplier"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your supplier!',
-              },
-            ]}
-          >
-            <AutoCompleteAsync
-              entity={'supplier'}
-              displayLabels={['email']}
-              searchFields={['company', 'email']}
-              // onUpdateValue={autoCompleteUpdate}
-            />
-          </Form.Item>
-        </Col>
-        <Col className="gutter-row" span={8}>
+        <Col className="gutter-row" span={7}>
           <Form.Item
             name="date"
             label="Date"
@@ -148,6 +112,8 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
           </Form.Item>
         </Col>
+      </Row>
+      <Row gutter={[12, 0]}>
         <Col className="gutter-row" span={7}>
           <Form.Item
             name="expiredDate"
@@ -163,23 +129,113 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
           </Form.Item>
         </Col>
-      </Row>
-      <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span = {18}>
-          <Form.Item label="Note" name="note">
-            <Input />
+        <Col className="gutter-row" span={8}>
+          <Form.Item
+            name="expiredDatePayment"
+            label="Expire Date Payment"
+            rules={[
+              {
+                required: true,
+                type: 'object',
+              },
+            ]}
+            initialValue={dayjs().add(30, 'days')}
+          >
+            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={7}>
+          <Form.Item
+            name="expiredDateShipment"
+            label="Expire Date Shipment"
+            rules={[
+              {
+                required: true,
+                type: 'object',
+              },
+            ]}
+            initialValue={dayjs().add(30, 'days')}
+          >
+            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={9}>
+
+      
+        
+        <Col className="gutter-row" span={7}>
           <Form.Item
-            label="URL Requisition"
-            name="requisitionfile"
+            name ="shipment"
+            label="Shipment Type"
             rules={[
               {
-                required: false,
-                message: 'Please input a URL for the requisition file!',
+                required: true,
+                message: 'Please input shipment type!',
+              },
+            ]}
+          >
+            <Select
+              options={[
+                { value: 'included', label: 'Included' },
+                { value: 'client', label: 'By client' },
+              ]}
+            ></Select>
+          </Form.Item>
+        </Col>
+
+        <Col className="gutter-row" span={8}>
+          <Form.Item
+            name="dateShipment"
+            label="Date of the Shipment"
+            rules={[
+              ({ getFieldValue }) => ({
+                required: getFieldValue('status') === 'sent' && getFieldValue('shipment') === 'included',
+                message: 'Please input Shimpent Cost!',
+                type: 'object',
+              }),
+            ]}
+          >
+            <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+          </Form.Item>
+        </Col>
+
+
+        <Col className="gutter-row" span={7}>
+          <Form.Item
+            label="Shipment Cost"
+            name="shipmentCost"
+            rules={[
+              ({ getFieldValue }) => ({
+                required: getFieldValue('status') === 'sent' && getFieldValue('shipment') === 'included',
+                message: 'Please input Shimpent Cost!',
+              }),
+            ]}
+          >
+            <InputNumber
+              className="moneyInput"
+              min={1}
+              controls={false}
+              addonAfter={money.currency_position === 'after' ? money.currency_symbol : undefined}
+              addonBefore={money.currency_position === 'before' ? money.currency_symbol : undefined}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={[12, 0]}>
+      <Col className="gutter-row" span={8}>
+          <Form.Item label="Note" name="note">
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={7}>
+          <Form.Item
+            label="URL Confirmation"
+            name="confirmationfile"
+            rules={[
+              {
+                required: true,
+                message: 'Please input a URL for the confirmation file!',
               },
               {
                 type: 'string', // Define the type of input expected
@@ -194,15 +250,15 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           </Form.Item>
         </Col>
 
-        <Col className="gutter-row" span={9}>
+        <Col className="gutter-row" span={7}>
           <Form.Item
-            label="URL Quotation"
-            name="quotationfile"
+            label="URL Shipment"
+            name="shipmentfile"
             rules={[
-              {
-                required: false,
-                message: 'Please input a URL for the quotation file!',
-              },
+              ({ getFieldValue }) => ({
+                required: getFieldValue('status') === 'sent' && getFieldValue('shipment') === 'included',
+                message: 'Please input Shimpent File!',
+              }),
               {
                 type: 'string', // Define the type of input expected
                 pattern: new RegExp(
@@ -243,12 +299,12 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             <Form.Item>
               <Button
                 type="dashed"
-                onClick={() => add()}
+                //onClick={() => add()}
                 block
                 icon={<PlusOutlined />}
                 ref={addField}
               >
-                Add field
+                No extra fields for confirmation
               </Button>
             </Form.Item>
           </>
@@ -260,7 +316,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           <Col className="gutter-row" span={5}>
             <Form.Item>
               <Button type="primary" htmlType="submit" icon={<PlusOutlined />} block>
-                Save Invoice
+                Save Confirmation
               </Button>
             </Form.Item>
           </Col>

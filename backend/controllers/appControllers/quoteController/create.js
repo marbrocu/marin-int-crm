@@ -20,7 +20,7 @@ const create = async (req, res) => {
     const invoices = await InvoiceModel.find({ _id: { $in: invoiceObj } });
     for (const invoice of invoices) {
       for (const item of invoice.items) {
-        item.available = item.quantity; // Adding the "available" field
+        item.available = []; // Adding the "available" field
         
       }
     }

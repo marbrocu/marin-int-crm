@@ -1,14 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
-const { SendQuote } = require('@/emailTemplate/SendInvoice');
+const { SendInvoice } = require('@/emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
-const QuoteModel = mongoose.model('Quote');
+const InvoiceModel = mongoose.model('Confirmation');
 const ClientModel = mongoose.model('Client');
 const ObjectId = mongoose.Types.ObjectId;
 const { Resend } = require('resend');
 
-module.exports = sendMail = async (req, res) => {
+const sendMail = async (req, res) => {
   const { id } = req.body;
 
   // Throw error if no id
@@ -17,7 +17,7 @@ module.exports = sendMail = async (req, res) => {
   }
 
   try {
-    const result = await QuoteModel.findById(ObjectId(id)).exec();
+    const result = await InvoiceModel.findById(ObjectId(id)).exec();
 
     // Throw error if no result
     if (!result) {
@@ -29,24 +29,29 @@ module.exports = sendMail = async (req, res) => {
     const { email, managerName } = await ClientModel.findById(client).exec();
 
     await custom
-      .generatePdf('Quote', { filename: 'invoice', format: 'A4' }, result, async (fileLocation) => {
-        // Send the mail using the details gotten from the client
-        const { id: mailId } = await sendViaApi(email, managerName, fileLocation);
+      .generatePdf(
+        'Confirmation',
+        { filename: 'confirmation', format: 'A4' },
+        result,
+        async (fileLocation) => {
+          // Send the mail using the details gotten from the client
+          const { id: mailId } = await sendViaApi(email, managerName, fileLocation);
 
-        // Update the status to sent if mail was successfull
-        if (mailId) {
-          QuoteModel.findByIdAndUpdate(id, { status: 'sent' })
-            .exec()
-            .then((data) => {
-              // Returning successfull response
-              return res.status(200).json({
-                success: true,
-                result: mailId,
-                message: `Successfully sent quote ${id} to ${email}`,
+          // Update the status to sent if mail was successfull
+          if (mailId) {
+            InvoiceModel.findByIdAndUpdate(id, { status: 'sent' })
+              .exec()
+              .then((data) => {
+                // Returning successfull response
+                return res.status(200).json({
+                  success: true,
+                  result: mailId,
+                  message: `Successfully sent confirmation ${id} to ${email}`,
+                });
               });
-            });
+          }
         }
-      })
+      )
       .catch((err) => {
         return res.status(500).json({
           success: false,
@@ -95,15 +100,17 @@ const sendViaApi = async (email, name, filePath) => {
   const data = await resend.emails.send({
     from: 'informacion@marininternational.com',
     to: email,
-    subject: 'Quote From Idurar',
+    subject: 'Confirmation From Idurar',
     attachments: [
       {
-        filename: 'Quote.pdf',
+        filename: 'Confirmation.pdf',
         content: attatchedFile,
       },
     ],
-    html: SendQuote({ name }),
+    html: SendInvoice({ name }),
   });
 
   return data;
 };
+
+module.exports = sendMail;

@@ -1,28 +1,48 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const quoteSchema = new mongoose.Schema({
+const confirmationSchema = new mongoose.Schema({
   removed: {
     type: Boolean,
     default: false,
   },
-  converted: {
-    type: Boolean,
-    default: false,
-  },
   number: {
-    type: Number,
+    type: String,
+    required: true,
+  },
+  purchaseNumber:{
+    type: String,
     required: true,
   },
   year: {
     type: Number,
     required: true,
   },
+  recurring: {
+    type: String,
+    default: '0',
+  },
+  shipment: {
+    type: String,
+    default: '0',
+  },
   date: {
     type: Date,
     required: true,
   },
+  dateShipment: {
+    type: Date,
+    required: false,
+  },
   expiredDate: {
+    type: Date,
+    required: false,
+  },
+  expiredDatePayment: {
+    type: Date,
+    required: true,
+  },
+  expiredDateShipment: {
     type: Date,
     required: true,
   },
@@ -38,21 +58,23 @@ const quoteSchema = new mongoose.Schema({
     required: true,
     autopopulate: true,
   },
-  shipment: {
+  purchase: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Quote',
+    required: true,
+    //autopopulate: true,
+  },
+  confirmationfile: {
     type: String,
     required: false,
   },
-  purchasefile: {
+  shipmentfile: {
     type: String,
     required: false,
   },
-  frominvoices:[{
-    invoiceNumber: {
-      type: String,
-      required: true,
-    },
-  }
-  ],
+  shipmentCost: {
+    type: Number,
+  },
   items: [
     {
       itemName: {
@@ -66,10 +88,6 @@ const quoteSchema = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      available: {
-        type: Array,
-        required: false,
-      },
       price: {
         type: Number,
         required: true,
@@ -82,15 +100,19 @@ const quoteSchema = new mongoose.Schema({
   ],
   taxRate: {
     type: Number,
+    default: 0,
   },
   subTotal: {
     type: Number,
+    default: 0,
   },
   taxTotal: {
     type: Number,
+    default: 0,
   },
   total: {
     type: Number,
+    default: 0,
   },
   credit: {
     type: Number,
@@ -105,7 +127,7 @@ const quoteSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'draft',
+    default: 'pending',
   },
   pdfPath: {
     type: String,
@@ -121,5 +143,5 @@ const quoteSchema = new mongoose.Schema({
   },
 });
 
-quoteSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Quote', quoteSchema);
+confirmationSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Confirmation', confirmationSchema);

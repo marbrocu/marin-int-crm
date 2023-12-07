@@ -57,6 +57,27 @@ export default function UpdateForm({ config, formElements }) {
           expiredDate: dayjs(newValues['expiredDate']),
         };
       }
+      console.log("HERE")
+      if (newValues.expiredDatePayment) {
+        console.log("PASSSSSSING")
+        newValues = {
+          ...newValues,
+          expiredDatePayment: dayjs(newValues['expiredDatePayment']),
+        };
+      }
+      if (newValues.dateShipment) {
+        console.log("PASSSSSSING")
+        newValues = {
+          ...newValues,
+          dateShipment: dayjs(newValues['dateShipment']),
+        };
+      }
+      if (newValues.expiredDateShipment) {
+        newValues = {
+          ...newValues,
+          expiredDateShipment: dayjs(newValues['expiredDateShipment']),
+        };
+      }
       if (newValues.created) {
         newValues = {
           ...newValues,

@@ -74,7 +74,7 @@ export const routesConfig = [
   },
   {
     path: '/invoice/pay/:id',
-    component: 'Invoice/InvoiceRecordPayment',
+    component: 'Confirmation/ConfirmationRecordPayment',
   },
   {
     path: '/quote',
@@ -92,6 +92,33 @@ export const routesConfig = [
     path: '/quote/update/:id',
     component: 'Quote/QuoteUpdate',
   },
+
+  ///////////
+
+
+  {
+    path: '/confirmation',
+    component: 'Confirmation/index',
+  },
+  {
+    path: '/confirmation/create',
+    component: 'Confirmation/ConfirmationCreate',
+  },
+  {
+    path: '/confirmation/read/:id',
+    component: 'Confirmation/ConfirmationRead',
+  },
+  {
+    path: '/confirmation/update/:id',
+    component: 'Confirmation/ConfirmationUpdate',
+  },
+
+
+  ////////////
+
+
+
+
   {
     path: '/payment/invoice',
     component: 'PaymentInvoice/index',

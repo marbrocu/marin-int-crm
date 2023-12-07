@@ -92,6 +92,15 @@ export default function UpdateItem({ config, UpdateForm }) {
       if (current.expiredDate) {
         current.expiredDate = dayjs(current.expiredDate);
       }
+      if (current.expiredDatePayment) {
+        current.expiredDatePayment = dayjs(current.expiredDatePayment);
+      }
+      if (current.expiredDateShipment) {
+        current.expiredDateShipment = dayjs(current.expiredDateShipment);
+      }
+      if (current.dateShipment) {
+        current.dateShipment = dayjs(current.dateShipment);
+      }
       if (!current.taxRate) {
         current.taxRate = 0;
       }

@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 
 const Model = mongoose.model('PaymentInvoice');
-const Invoice = mongoose.model('Invoice');
+const Confirmation = mongoose.model('Confirmation');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 
 const { calculate } = require('@/helpers');
 
 const create = async (req, res) => {
   try {
+    console.log(req.body)
     // Creating a new document in the collection
     if (req.body.amount === 0) {
       return res.status(202).json({
@@ -17,10 +18,12 @@ const create = async (req, res) => {
       });
     }
 
-    const currentInvoice = await Invoice.findOne({
+    const currentConfirmation = await Confirmation.findOne({
       _id: req.body.invoice,
       removed: false,
     });
+
+    console.log(currentInvoice)
 
     const {
       total: previousTotal,
