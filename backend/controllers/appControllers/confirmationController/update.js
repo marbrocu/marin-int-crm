@@ -50,6 +50,7 @@ const update = async (req, res) => {
       _id: previousInvoice.purchase,
       removed: false,
     });
+    const quoteStatus = fromPurchase.status
 
 
     for (const confirmationItem of body.items) {
@@ -132,6 +133,9 @@ const update = async (req, res) => {
       });
       console.log(totalAvailable)
       console.log(item.quantity)
+      if (totalAvailable === item.quantity){
+        quoteStatus = "completed"
+      }
       // Compare the total available quantity with the item's quantity
       return totalAvailable > item.quantity;
     });
@@ -153,8 +157,9 @@ const update = async (req, res) => {
     // Returning successfull response
     //await save in quote schema
     console.log(fromPurchase.items[0].available)
+    fromPurchase.status = quoteStatus
     //fromPurchase.save()
-    result = await QuoteModel.findOneAndUpdate({ _id: fromPurchase.id, removed: false }, fromPurchase, {
+    result = await QuoteModel.findOneAndUpdate({ _id: fromPurchase.id, removed: false}, fromPurchase, {
       new: true, // return the new result instead of the old one
     }).exec();
     

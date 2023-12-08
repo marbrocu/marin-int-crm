@@ -26,39 +26,7 @@ const clientSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  bankAccount: {
-    type: String,
-    trim: true,
-  },
-  companyRegNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxID: {
-    type: String,
-    trim: true,
-  },
-  customField: [
-    {
-      fieldName: {
-        type: String,
-        trim: true,
-      },
-      fieldValue: {
-        type: String,
-        trim: true,
-      },
-    },
-  ],
   address: {
-    type: String,
-    trim: true,
-  },
-  country: {
     type: String,
     trim: true,
   },
@@ -67,23 +35,11 @@ const clientSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  fax: {
-    type: String,
-    trim: true,
-  },
-  cell: {
-    type: String,
-    trim: true,
-  },
   email: {
     type: String,
     trim: true,
     lowercase: true,
     unique: true,
-  },
-  website: {
-    type: String,
-    trim: true,
   },
   created: {
     type: Date,

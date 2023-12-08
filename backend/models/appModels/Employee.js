@@ -10,85 +10,73 @@ const employeeSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  company: {
-    type: String,
-    trim: true,
-    unique: true,
-    required: true,
-  },
-  managerName: {
+  name: {
     type: String,
     trim: true,
     required: true,
   },
-  managerSurname: {
+  surname: {
     type: String,
     trim: true,
     required: true,
   },
-  bankAccount: {
-    type: String,
-    trim: true,
+  birthday: {
+    type: Date,
+    required: true,
   },
-  companyRegNumber: {
+  birthplace: {
     type: String,
-    trim: true,
   },
-  companyTaxNumber: {
+  gender: {
     type: String,
-    trim: true,
+    required: true,
   },
-  companyTaxID: {
+  photo: {
     type: String,
-    trim: true,
+    trim: false,
   },
-  customField: [
-    {
-      fieldName: {
-        type: String,
-        trim: true,
-      },
-      fieldValue: {
-        type: String,
-        trim: true,
-      },
-    },
-  ],
+  department: {
+    type: String,
+    required: true,
+  },
+  position: {
+    type: String,
+    required: true,
+  },
   address: {
     type: String,
     trim: true,
   },
-  country: {
+  state: {
     type: String,
-    trim: true,
   },
   phone: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  fax: {
-    type: String,
-    trim: true,
-  },
-  cell: {
     type: String,
     trim: true,
   },
   email: {
     type: String,
     trim: true,
-    lowercase: true,
-    unique: true,
   },
-  website: {
+  urgentContact: {
     type: String,
     trim: true,
+  },
+  status: {
+    type: String,
+    default: '1',
   },
   created: {
     type: Date,
     default: Date.now,
   },
+});
+employeeSchema.plugin(require('mongoose-autopopulate'));
+employeeSchema.index({
+  name: 'text',
+  surname: 'text',
+  birthday: 'text',
+  status: 'text',
 });
 
 module.exports = mongoose.model('Employee', employeeSchema);
