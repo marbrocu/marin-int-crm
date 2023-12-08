@@ -4,12 +4,7 @@ import { Button } from 'antd';
 
 const Notifications = () => {
   const [notifications, setNotifications] = React.useState([
-    { id: 1, text: 'First notificationnnnnnnnnnnnnnnnn' },
-    { id: 2, text: 'Second notification' },
-    { id: 3, text: 'Third ' },
-    { id: 4, text: 'Fourth notification' },
-    { id: 5, text: 'Fifth notification' },
-    { id: 6, text: 'Sixth notification' },
+    { id: 1, text: 'Update to site' },
   ]);
 
   const deleteNotification = (id) => {

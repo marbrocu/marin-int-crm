@@ -16,6 +16,12 @@ function Supplier() {
     {
       title: 'Branch',
       dataIndex: 'branch.branchName',
+      render: (text, record) => {
+        if (record.branch && record.branch.branchName) {
+          return record.branch.branchName;
+        }
+        return 'N/A'; // or any default value when branch or branchName is missing
+      },
     },
     {
       title: 'Surname',

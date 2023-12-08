@@ -177,6 +177,11 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             label="URL Requisition"
             name="requisitionfile"
             rules={[
+                ({ getFieldValue }) => ({
+                  required: getFieldValue('status') === 'requisition',
+                  message: 'Please input Requisition file!',
+                }),
+              
               {
                 required: false,
                 message: 'Please input a URL for the requisition file!',

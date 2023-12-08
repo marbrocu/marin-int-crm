@@ -47,19 +47,18 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
   return (
     <>
       <Row gutter={[12, 0]}>
-        <Col className="gutter-row" span={5}>
+          <Col className="gutter-row" span={5}>
           <Form.Item
             label="Number"
             name="number"
-            //initialValue={1}
             rules={[
               {
                 required: true,
-                message: 'Please input quote number!',
+                message: 'Please input purchase number!',
               },
             ]}
           >
-            <InputNumber min={1} style={{ width: '100%' }} />
+            <Input style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>

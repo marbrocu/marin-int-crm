@@ -64,7 +64,7 @@ export default function QuoteFormUpdate({ subTotal = 0, current = null }) {
             />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" span={8}>
           <Form.Item
             label="Invoice Number"
             name="number"
@@ -79,7 +79,7 @@ export default function QuoteFormUpdate({ subTotal = 0, current = null }) {
             <Input style={{ width: '100%' }} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={5}>
+        <Col className="gutter-row" span={7}>
           <Form.Item
             label="year"
             name="year"
@@ -94,26 +94,7 @@ export default function QuoteFormUpdate({ subTotal = 0, current = null }) {
             <InputNumber style={{ width: '100%' }} />
           </Form.Item>
         </Col>
-        <Col className="gutter-row" span={5}>
-          <Form.Item
-            label="status"
-            name="status"
-            rules={[
-              {
-                required: false,
-                message: 'Please input invoice status!',
-              },
-            ]}
-            initialValue={'requisition'}
-          >
-            <Select
-              options={[
-                { value: 'requisition', label: 'Requisition' },
-                { value: 'quotation', label: 'Quotation' },
-              ]}
-            ></Select>
-          </Form.Item>
-        </Col>
+
         <Col className="gutter-row" span={9}>
           <Form.Item
             name="supplier"
