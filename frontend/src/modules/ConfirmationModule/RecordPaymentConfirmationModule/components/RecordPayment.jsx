@@ -26,7 +26,13 @@ export default function RecordPayment({ config }) {
   const [maxAmount, setMaxAmount] = useState(0);
   useEffect(() => {
     if (currentInvoice) {
-      const { credit, total, discount } = currentInvoice;
+      console.log("current")
+      console.log(currentInvoice)
+      let { credit, total, discount } = currentInvoice;
+      console.log(credit)
+      //credit = 0
+      console.log(total)
+      console.log(discount)
 
       setMaxAmount(calculate.sub(calculate.sub(total, discount), credit));
     }

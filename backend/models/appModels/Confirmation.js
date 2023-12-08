@@ -122,6 +122,16 @@ const confirmationSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  payment: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Payment',
+    },
+  ],
+  paymentStatus: {
+    type: String,
+    default: 'unpaid',
+  },
   note: {
     type: String,
   },

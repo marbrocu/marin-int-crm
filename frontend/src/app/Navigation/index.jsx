@@ -27,7 +27,7 @@ const SIDEBAR_MENU_REL = [
 
 const SIDEBAR_MENU_IRREL = [
 
-  { key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
+  //{ key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
   { key: '/admin', icon: <UserOutlined />, title: 'Admin' },
   
 ];
@@ -49,7 +49,7 @@ const PURCHASE_SUBMENU = [
   { key: '/quote', icon: <FileOutlined />, title: 'Purchase' },
   { key: '/confirmation', icon: <FileOutlined />, title: 'Confirmation' },
   //{ key: '/offer', icon: <FileOutlined />, title: 'Offer' },
-  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
+  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payments' },
 ];
 
 const SETTINGS_SUBMENU = [

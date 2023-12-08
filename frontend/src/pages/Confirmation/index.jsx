@@ -11,19 +11,25 @@ export default function Confirmation() {
     displayLabels: ['name', 'surname'],
     searchFields: 'name,surname,birthday',
   };
-  const entityDisplayLabels = ['number', 'client.email', 'supplier.email'];
+  const entityDisplayLabels = ['number', 'client.branch.branchName', 'supplier.email'];
   const dataTableColumns = [
     {
-      title: 'Number',
-      dataIndex: 'number',
-    },
-    {
       title: 'Client',
-      dataIndex: ['client', 'email'],
+      render: (record) => {
+        if (record.client && record.client.branch && record.client.branch.branchName) {
+          return record.client.branch.branchName;
+        }
+        return ''; // Or any default value when the property is undefined
+      },
     },
     {
       title: 'Supplier',
-      dataIndex: ['supplier', 'email'],
+      render: (record) => {
+        if (record.supplier && record.supplier.branch && record.supplier.branch.branchName) {
+          return record.supplier.branch.branchName;
+        }
+        return ''; // Or any default value when the property is undefined
+      },
     },
     {
       title: 'Date',
@@ -51,6 +57,22 @@ export default function Confirmation() {
         let color = status === 'requisition' ? 'cyan' : status === 'quotation' ? 'magenta' : 'gold';
 
         return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
+      },
+    },
+    {
+      title: 'Payment',
+      dataIndex: 'paymentStatus',
+      render: (paymentStatus) => {
+        let color =
+          paymentStatus === 'unpaid'
+            ? 'volcano'
+            : paymentStatus === 'paid'
+            ? 'green'
+            : paymentStatus === 'overdue'
+            ? 'red'
+            : 'purple';
+
+        return <Tag color={color}>{paymentStatus && paymentStatus.toUpperCase()}</Tag>;
       },
     },
   ];

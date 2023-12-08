@@ -11,7 +11,7 @@ const convertQuoteToInvoice = async (req, res) => {
 
     // Fetch the quote from the database
     const quote = await Model.findById(quoteId);
-    console.log(quote)
+    //console.log(quote)
     if (!quote) {
       return res.status(404).json({
         success: false,
@@ -28,6 +28,7 @@ const convertQuoteToInvoice = async (req, res) => {
         message: 'Quote is already converted to an invoice.',
       });
     }
+    
 
     const availableItems = quote.items.some((item) => item.quantity > 0);
     if (!availableItems) {
@@ -37,7 +38,7 @@ const convertQuoteToInvoice = async (req, res) => {
         message: 'No available items in the quote.',
       });
     }
-
+    
     const itemsWithoutPrice = quote.items.some((item) => item.price === undefined || item.price === null);
     if (itemsWithoutPrice) {
       return res.status(409).json({
@@ -46,10 +47,10 @@ const convertQuoteToInvoice = async (req, res) => {
         message: 'Some items in the quote do not have prices.',
       });
     }
-
-    const availableItemsarray = items.some((item) => {
-      let totalAvailable = 0; // Initialize the total available quantity for the current item
     
+    const availableItemsarray = quote.items.some((item) => {
+      let totalAvailable = 0; // Initialize the total available quantity for the current item
+      
       item.available.forEach((avail) => {
         const values = Object.values(avail);
         if (values.length > 0) {
@@ -61,7 +62,7 @@ const convertQuoteToInvoice = async (req, res) => {
       // Compare the total available quantity with the item's quantity
       return totalAvailable > item.quantity;
     });
-    
+    console.log("TRABAJANDO")
     if (availableItemsarray) {
       return res.status(409).json({
         success: false,

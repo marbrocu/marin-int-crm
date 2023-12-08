@@ -78,7 +78,7 @@ export default function DataTable({ config, DataTableDropMenu }) {
             <Button onClick={handelDataTableLoad} key={`${uniqueId()}`} icon={<RedoOutlined />}>
               Refresh
             </Button>,
-            create ? <AddNewItem config={config} key={`${uniqueId()}`} /> : <></>,
+            create && entity !== 'confirmation' ? <AddNewItem config={config} key={`${uniqueId()}`} /> : null,
           ]}
           style={{
             padding: '20px 0px',

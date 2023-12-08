@@ -20,7 +20,21 @@ export default function Quote() {
     },
     {
       title: 'Client',
-      dataIndex: ['client', 'company'],
+      render: (record) => {
+        if (record.client && record.client.branch && record.client.branch.branchName) {
+          return record.client.branch.branchName;
+        }
+        return ''; // Or any default value when the property is undefined
+      },
+    },
+    {
+      title: 'Supplier',
+      render: (record) => {
+        if (record.supplier && record.supplier.branch && record.supplier.branch.branchName) {
+          return record.supplier.branch.branchName;
+        }
+        return ''; // Or any default value when the property is undefined
+      },
     },
     {
       title: 'Date',
