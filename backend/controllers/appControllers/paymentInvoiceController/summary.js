@@ -9,6 +9,7 @@ const summary = async (req, res) => {
 
     const { type } = req.query;
 
+
     if (type) {
       if (['week', 'month', 'year'].includes(type)) {
         defaultType = type;
@@ -20,11 +21,11 @@ const summary = async (req, res) => {
         });
       }
     }
-
+    
     const currentDate = moment();
     let startDate = currentDate.clone().startOf(defaultType);
     let endDate = currentDate.clone().endOf(defaultType);
-
+    
     // get total amount of invoices
     const result = await Model.aggregate([
       {
@@ -55,6 +56,7 @@ const summary = async (req, res) => {
         },
       },
     ]);
+
 
     return res.status(200).json({
       success: true,

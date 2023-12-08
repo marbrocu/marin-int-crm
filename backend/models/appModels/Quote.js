@@ -105,7 +105,7 @@ const quoteSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'draft',
+    default: 'pending',
   },
   pdfPath: {
     type: String,

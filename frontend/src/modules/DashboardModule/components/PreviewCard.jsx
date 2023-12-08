@@ -2,15 +2,15 @@ import React, { useMemo } from 'react';
 import { Col, Progress, Spin } from 'antd';
 
 const colours = {
-  draft: '#595959',
+  pending: '#595959',
   sent: '#1890ff',
-  pending: '#1890ff',
+  //pending: '#1890ff',
   unpaid: '#ffa940',
   overdue: '#ff4d4f',
   partially: '#13c2c2',
   paid: '#95de64',
-  declined: '#ff4d4f',
-  accepted: '#95de64',
+  requisition: '#ff4d4f',
+  receieved: '#95de64',
   cyan: '#13c2c2',
   purple: '#722ed1',
   expired: '#614700',
@@ -18,9 +18,35 @@ const colours = {
 
 const defaultStatistics = [
   {
-    tag: 'draft',
+    tag: 'pending',
     value: 0,
   },
+  {
+    tag: 'completed',
+    value: 0,
+  },
+  {
+    tag: 'expired',
+    value: 0,
+  },
+];
+
+const defaultPurchaseStatistics = [
+  {
+    tag: 'pending',
+    value: 0,
+  },
+  {
+    tag: 'completed',
+    value: 0,
+  },
+  {
+    tag: 'expired',
+    value: 0,
+  },
+];
+
+const defaultConfirmationStatistics = [
   {
     tag: 'pending',
     value: 0,
@@ -30,26 +56,7 @@ const defaultStatistics = [
     value: 0,
   },
   {
-    tag: 'accepted',
-    value: 0,
-  },
-  {
-    tag: 'declined',
-    value: 0,
-  },
-  {
-    tag: 'expired',
-    value: 0,
-  },
-];
-
-const defaultInvoiceStatistics = [
-  {
-    tag: 'draft',
-    value: 0,
-  },
-  {
-    tag: 'pending',
+    tag: 'received',
     value: 0,
   },
   {
@@ -69,6 +76,22 @@ const defaultInvoiceStatistics = [
     value: 0,
   },
 ];
+
+const defaultInvoiceStatistics = [
+  {
+    tag: 'quotation',
+    value: 0,
+  },
+  {
+    tag: 'requisition',
+    value: 0,
+  },
+  {
+    tag: 'overdue',
+    value: 0,
+  },
+];
+
 
 const PreviewState = ({ tag, color, value }) => {
   return (
@@ -101,7 +124,24 @@ export default function PreviewCard({
           : null;
         return matchedStat || defaultStat;
       });
-    } else {
+    }
+    else if (entity === 'confirmation') {
+      return defaultConfirmationStatistics.map((defaultStat) => {
+        const matchedStat = Array.isArray(statistics)
+          ? statistics.find((stat) => stat.tag === defaultStat.tag)
+          : null;
+        return matchedStat || defaultStat;
+      });
+    }
+    else if (entity === 'quote'){
+      return defaultPurchaseStatistics.map((defaultStat) => {
+        const matchedStat = Array.isArray(statistics)
+          ? statistics.find((stat) => stat.tag === defaultStat.tag)
+          : null;
+        return matchedStat || defaultStat;
+      });
+    }
+    else {
       return defaultStatistics.map((defaultStat) => {
         const matchedStat = Array.isArray(statistics)
           ? statistics.find((stat) => stat.tag === defaultStat.tag)

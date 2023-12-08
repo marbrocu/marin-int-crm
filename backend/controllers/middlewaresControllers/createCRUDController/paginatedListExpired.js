@@ -15,10 +15,10 @@ const paginatedListExpired = async (Model, req, res) => {
       // Resolving both promises
       const [result, count] = await Promise.all([resultsPromise, countPromise]);
       // Calculating total pages
-      console.log(result)
-      console.log(count)
+      //console.log(result)
+      //console.log(count)
       const pages = Math.ceil(count / limit);
-      console.log(pages)
+      //console.log(pages)
   
       // Getting Pagination Object
       const pagination = { page, pages, count };

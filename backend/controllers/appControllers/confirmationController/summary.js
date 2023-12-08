@@ -25,7 +25,7 @@ const summary = async (req, res) => {
     let startDate = currentDate.clone().startOf(defaultType);
     let endDate = currentDate.clone().endOf(defaultType);
 
-    const statuses = ['draft', 'pending', 'overdue', 'paid', 'unpaid', 'partially'];
+    const statuses = [ 'pending','sent', 'received','overdue', 'paid', 'unpaid', 'partially'];
 
     const response = await Model.aggregate([
       {

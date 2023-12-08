@@ -90,7 +90,7 @@ export const erp = {
             total: parseInt(data.pagination.count, 10),
           },
         };
-        console.log(result)
+        //console.log(result)
         dispatch({
           type: actionTypes.REQUEST_SUCCESS,
           keyState: 'list',

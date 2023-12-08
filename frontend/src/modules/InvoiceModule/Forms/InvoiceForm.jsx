@@ -108,8 +108,8 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           >
             <Select
               options={[
-                { value: 'requisition', label: 'Requisition' },
                 { value: 'quotation', label: 'Quotation' },
+                { value: 'requisition', label: 'Requisition' },
               ]}
             ></Select>
           </Form.Item>

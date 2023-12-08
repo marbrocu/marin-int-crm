@@ -19,7 +19,12 @@ const dataTableColumns = [
   },
   {
     title: 'Client',
-    dataIndex: ['client', 'company'],
+    render: (record) => {
+      if (record.client && record.client.branch && record.client.branch.branchName) {
+        return record.client.branch.branchName;
+      }
+      return ''; // Or any default value when the property is undefined
+    },
   },
 
   {
@@ -52,8 +57,8 @@ export default function DashboardModule() {
     request.summary({ entity: 'quote' })
   );
 
-  const { result: offerResult, isLoading: offerLoading } = useFetch(() =>
-    request.summary({ entity: 'offer' })
+  const { result: confirmationResult, isLoading: confirmationLoading } = useFetch(() =>
+    request.summary({ entity: 'confirmation' })
   );
 
   const { result: paymentResult, isLoading: paymentLoading } = useFetch(() =>
@@ -76,9 +81,9 @@ export default function DashboardModule() {
       entity: 'quote',
     },
     {
-      result: offerResult,
-      isLoading: offerLoading,
-      entity: 'offer',
+      result: confirmationResult,
+      isLoading: confirmationLoading,
+      entity: 'confirmation',
     },
     {
       result: paymentResult,
@@ -95,7 +100,7 @@ export default function DashboardModule() {
     return (
       <SummaryCard
         key={index}
-        title={data?.entity === 'paymentInvoice' ? 'Payment' : data?.entity}
+        title={data?.entity === 'payment' ? 'Payment' : data?.entity}
         tagColor={
           data?.entity === 'invoice' ? 'cyan' : data?.entity === 'quote' ? 'purple' : 'green'
         }
@@ -108,13 +113,19 @@ export default function DashboardModule() {
 
   const statisticCards = entityData.map((data, index) => {
     const { result, entity, isLoading } = data;
-
+    let titleuse
     if (entity === 'payment') return null;
+
+    if (data?.entity === "quote") {
+      titleuse = `Purchase Preview`;
+    } else {
+      titleuse = `${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} Preview`;
+    }
 
     return (
       <PreviewCard
         key={index}
-        title={`${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} Preview`}
+        title={titleuse}
         isLoading={isLoading}
         entity={entity}
         statistics={
@@ -139,8 +150,8 @@ export default function DashboardModule() {
           prefix={'Not Paid'}
           isLoading={invoiceLoading}
           tagContent={
-            invoiceResult?.total_undue &&
-            `$ ${invoiceResult?.total_undue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+            confirmationResult?.total_undue &&
+            `$ ${confirmationResult?.total_undue}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
           }
         />
       </Row>
@@ -176,7 +187,7 @@ export default function DashboardModule() {
         <Col className="gutter-row w-full" sm={{ span: 24 }} lg={{ span: 12 }}>
           <div className="whiteBox shadow" style={{ height: '100%' }}>
             <div className="pad20">
-              <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Quotes</h3>
+              <h3 style={{ color: '#22075e', marginBottom: 5 }}>Recent Purchase</h3>
             </div>
             <RecentTable entity={'quote'} dataTableColumns={dataTableColumns} />
           </div>

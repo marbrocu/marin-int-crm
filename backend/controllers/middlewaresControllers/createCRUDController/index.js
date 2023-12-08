@@ -27,11 +27,11 @@ const createCRUDController = (modelName) => {
     remove(Model, req, res);
   };
   crudMethods.list = async (req, res) => {
-    console.log("passing")
+    //console.log("passing")
     paginatedList(Model, req, res);
   };
   crudMethods.listExpired = async (req, res) => {
-    console.log("expassing")
+    //console.log("expassing")
     paginatedListExpired(Model, req, res);
   };
   crudMethods.listAll = async (req, res) => {
