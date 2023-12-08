@@ -13,7 +13,7 @@ export default function AnalyticSummaryCard({
       xs={{ span: 24 }}
       sm={{ span: 12 }}
       md={{ span: 12 }}
-      lg={{ span: 6}}
+      lg={{ span: 4}}
     >
       <div
         className="whiteBox shadow"
@@ -25,9 +25,9 @@ export default function AnalyticSummaryCard({
           </h3>
         </div>
         <Divider style={{ padding: 0, margin: 0 }}></Divider>
-        <div className="pad15">
+        <div className="pad5">
           <Row gutter={[0, 0]} justify="space-between" wrap={false}>
-            <Col className="gutter-row" flex="50px" style={{ textAlign: 'left' }}>
+            <Col className="gutter-row" flex="10px" style={{ textAlign: 'left' }}>
               <div className="left" style={{ whiteSpace: 'nowrap' }}>
                 {prefix}
               </div>

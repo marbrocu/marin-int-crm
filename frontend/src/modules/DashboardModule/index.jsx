@@ -104,7 +104,7 @@ export default function DashboardModule() {
         tagColor={
           data?.entity === 'invoice' ? 'cyan' : data?.entity === 'quote' ? 'purple' : 'green'
         }
-        prefix={'This month'}
+        prefix={'Month'}
         isLoading={isLoading}
         tagContent={result?.total && formatCurrency(result?.total)}
       />
