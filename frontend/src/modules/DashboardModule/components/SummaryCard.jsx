@@ -10,9 +10,9 @@ export default function AnalyticSummaryCard({
   return (
     <Col
       className="gutter-row"
-      xs={{ span: 24 }}
-      sm={{ span: 12 }}
-      md={{ span: 12 }}
+      xs={{ span: 12 }}
+      sm={{ span: 10 }}
+      md={{ span: 10 }}
       lg={{ span: 4}}
     >
       <div

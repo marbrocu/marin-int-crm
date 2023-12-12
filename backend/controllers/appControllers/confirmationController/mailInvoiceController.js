@@ -3,7 +3,7 @@ const path = require('path');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 const { SendInvoice } = require('@/emailTemplate/SendInvoice');
 const mongoose = require('mongoose');
-const InvoiceModel = mongoose.model('Confirmation');
+const InvoiceModel = mongoose.model('Invoice');
 const ClientModel = mongoose.model('Client');
 const ObjectId = mongoose.Types.ObjectId;
 const { Resend } = require('resend');
@@ -27,11 +27,11 @@ const sendMail = async (req, res) => {
     // Continue process if result is returned
     const { client } = result;
     const { email, managerName } = await ClientModel.findById(client).exec();
-
+    
     await custom
       .generatePdf(
-        'Confirmation',
-        { filename: 'confirmation', format: 'A4' },
+        'Invoice',
+        { filename: 'invoice', format: 'A4' },
         result,
         async (fileLocation) => {
           // Send the mail using the details gotten from the client
@@ -100,7 +100,7 @@ const sendViaApi = async (email, name, filePath) => {
   const data = await resend.emails.send({
     from: 'informacion@marininternational.com',
     to: email,
-    subject: 'Confirmation From Idurar',
+    subject: 'Confirmation From MarinInternational',
     attachments: [
       {
         filename: 'Confirmation.pdf',

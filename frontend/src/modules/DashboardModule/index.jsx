@@ -113,10 +113,10 @@ export default function DashboardModule() {
 
   const statisticCards = entityData.map((data, index) => {
     const { result, entity, isLoading } = data;
-    let titleuse
+    let titleuse;
     if (entity === 'payment') return null;
 
-    if (data?.entity === "quote") {
+    if (data?.entity === 'quote') {
       titleuse = `Purchase Preview`;
     } else {
       titleuse = `${data?.entity.charAt(0).toUpperCase() + data?.entity.slice(1)} Preview`;
@@ -142,7 +142,7 @@ export default function DashboardModule() {
 
   return (
     <DashboardLayout>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[10, 30]} justify="space-around">
         {cards}
         <SummaryCard
           title={'Due Balance'}
@@ -157,19 +157,19 @@ export default function DashboardModule() {
       </Row>
       <div className="space30"></div>
       <Row gutter={[24, 24]}>
-        <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
-          <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
-            <Row className="pad10" gutter={[0, 0]}>
-              {statisticCards}
-            </Row>
-          </div>
-        </Col>
         <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 6 }}>
           <CustomerPreviewCard
             isLoading={clientLoading}
             activeCustomer={clientResult?.active}
             newCustomer={clientResult?.new}
           />
+        </Col>
+        <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
+          <div className="whiteBox shadow" style={{ minHeight: '380px', height: '100%' }}>
+            <Row className="pad10" gutter={[0, 0]}>
+              {statisticCards}
+            </Row>
+          </div>
         </Col>
       </Row>
       <div className="space30"></div>
