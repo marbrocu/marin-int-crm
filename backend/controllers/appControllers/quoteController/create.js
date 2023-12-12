@@ -45,10 +45,10 @@ const create = async (req, res) => {
 
     
     const statuses = invoices.map(invoice => invoice.status);
-    const areStatusesEqual = statuses.every(status => status === 'requisition');
+    const areStatusesEqual = statuses.every(status => status === 'quotation');
 
     if (!areStatusesEqual) {
-      throw new Error('Not all invoices have the status "requisition"');
+      throw new Error('Not all invoices have the status "quotation"');
     }
 
     // Throw error if any condition is not met

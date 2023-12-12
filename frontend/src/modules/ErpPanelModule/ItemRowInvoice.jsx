@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, InputNumber, Row, Col } from 'antd';
+import { Form, Input, InputNumber,Select, Row, Col } from 'antd';
 
 import { DeleteOutlined } from '@ant-design/icons';
 import { useMoney } from '@/settings';
@@ -72,8 +72,39 @@ export default function ItemRowInvoice({ field, remove, current = null }) {
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={7}>
-        <Form.Item name={[field.name, 'description']} fieldKey={[field.fieldKey, 'description']}>
+        {/*<Form.Item name={[field.name, 'description']} fieldKey={[field.fieldKey, 'description']}>
           <Input placeholder="description Name" />
+        </Form.Item>*/}
+        <Form.Item
+          name={[field.name, 'description']}
+          fieldKey={[field.fieldKey, 'description']}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select>
+            <Select.Option value="Other">Other</Select.Option>
+            <Select.Option value="Pulping">Pulping</Select.Option>
+            <Select.Option value="Cleening">Cleening</Select.Option>
+            <Select.Option value="Dispersing">Dispersing</Select.Option>
+            <Select.Option value="Screening">Screening</Select.Option>
+            <Select.Option value="Refining">Refining</Select.Option>
+            <Select.Option value="Bleaching">Bleaching</Select.Option>
+            <Select.Option value="Deflaking">Deflaking</Select.Option>
+            <Select.Option value="Flotation">Flotation</Select.Option>
+            <Select.Option value="Pumps">Pumps</Select.Option>
+            <Select.Option value="Clothing">Clothing</Select.Option>
+            <Select.Option value="Dearation">Dearation</Select.Option>
+            <Select.Option value="Forming Section">Forming Section</Select.Option>
+            <Select.Option value="Press Section">Press Section</Select.Option>
+            <Select.Option value="Dryer Section">Dryer Section</Select.Option>
+            <Select.Option value="Reject Handling">Reject Handling</Select.Option>
+            <Select.Option value="Thickening Dewatering">Thickening Dewatering</Select.Option>
+            <Select.Option value="Sludge Handling">Sludge Handling</Select.Option>
+            
+          </Select>
         </Form.Item>
       </Col>
       <Col className="gutter-row" span={3}>

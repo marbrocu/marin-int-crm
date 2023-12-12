@@ -1,13 +1,13 @@
 const entity = 'invoice';
 
 const Labels = {
-  PANEL_TITLE: 'Invoice',
-  dataTableTitle: 'Invoices Lists',
-  ADD_NEW_ENTITY: 'Add new invoice',
-  DATATABLE_TITLE: 'Invoices List',
-  ENTITY_NAME: 'Invoice',
-  CREATE_ENTITY: 'Save invoice',
-  UPDATE_ENTITY: 'Update invoice',
+  PANEL_TITLE: 'Quotation',
+  dataTableTitle: 'Quotation Lists',
+  ADD_NEW_ENTITY: 'Add new quotation',
+  DATATABLE_TITLE: 'Quotations List',
+  ENTITY_NAME: 'Quotation',
+  CREATE_ENTITY: 'Save quotation',
+  UPDATE_ENTITY: 'Update quotation',
   RECORD_ENTITY: 'Record Payment',
 };
 

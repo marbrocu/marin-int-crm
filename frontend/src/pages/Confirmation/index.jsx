@@ -14,6 +14,10 @@ export default function Confirmation() {
   const entityDisplayLabels = ['number', 'client.branch.branchName', 'supplier.email'];
   const dataTableColumns = [
     {
+      title: 'Number',
+      dataIndex: 'number',
+    },
+    {
       title: 'Client',
       render: (record) => {
         if (record.client && record.client.branch && record.client.branch.branchName) {

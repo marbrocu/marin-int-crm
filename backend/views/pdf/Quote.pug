@@ -260,17 +260,18 @@ html
     
       header.clearfix
         .top-area
-          img.logo.left(src=" https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png")
+          img.logo.left(src="https://irp.cdn-website.com/26d142d0/MOBILE/jpg/667.jpg")
           .right.company-info
-              p IDURAR WEB Agency
-              p Centre d’affaire El-Mountazeh Oran - Algerie
-              p RC: 16A5414225 /NIF: 199035050030146 /AI: 31050981441
+              p MARIN INTERNATIONAL
+              p Privada del Sur 12, #7-1, Colonia Centro, Orizaba, Veracruz, C.P. 94300
+              p 272-725-7700 || 272-726-2434
+              p informacion@marin-international.com
               
         .col.col-24
           .space  
         .left.col-12
             h1.invoice
-              | QUOTE 
+              | PURCHASE 
             div 
               .col.col-8
                 p.strong Date :
@@ -279,13 +280,13 @@ html
                 p.strong Expired Date :
                 p #{moment(model.expiredDate).format("DD/MM/YYYY")}
               .col.col-8 
-                p.strong Quote Number :
+                p.strong Purchase Number :
                 p # #{model.number}/#{model.year || ""} 
               
         .right.col-10
             .billTo
                 p Bill To :
-                p #{model.client.company}
+                p #{model.client.branch.branchName}
                 p address : #{model.client.address}
                 p phone : #{model.client.phone}
                 p Tel : #{model.client.email}

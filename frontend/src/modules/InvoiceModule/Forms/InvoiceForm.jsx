@@ -104,12 +104,12 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 message: 'Please input invoice status!',
               },
             ]}
-            initialValue={'quotation'}
+            initialValue={'requisition'}
           >
             <Select
               options={[
-                { value: 'quotation', label: 'Quotation' },
                 { value: 'requisition', label: 'Requisition' },
+                { value: 'quotation', label: 'Quotation' },
               ]}
             ></Select>
           </Form.Item>
@@ -177,11 +177,6 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             label="URL Requisition"
             name="requisitionfile"
             rules={[
-                ({ getFieldValue }) => ({
-                  required: getFieldValue('status') === 'requisition',
-                  message: 'Please input Requisition file!',
-                }),
-              
               {
                 required: false,
                 message: 'Please input a URL for the requisition file!',
@@ -203,11 +198,11 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           <Form.Item
             label="URL Quotation"
             name="quotationfile"
-            rules={[
-              {
-                required: false,
-                message: 'Please input a URL for the quotation file!',
-              },
+            rules={[({ getFieldValue }) => ({
+              required: getFieldValue('status') === 'quotation',
+              message: 'Please input Quotation file!',
+            }),
+          
               {
                 type: 'string', // Define the type of input expected
                 pattern: new RegExp(

@@ -4,6 +4,7 @@ import { Divider, Typography } from 'antd';
 import { Button, PageHeader, Row, Col, Descriptions, Statistic, Tag } from 'antd';
 import {
   EditOutlined,
+  FileTextOutlined,
   FilePdfOutlined,
   CloseCircleOutlined,
   RetweetOutlined,
@@ -126,18 +127,7 @@ export default function ReadItem({ config, selectedItem }) {
           >
             Close
           </Button>,
-          <Button
-            key={`${uniqueId()}`}
-            onClick={() => {
-              window.open(
-                `${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentErp._id}.pdf`,
-                '_blank'
-              );
-            }}
-            icon={<FilePdfOutlined />}
-          >
-            Download PDF
-          </Button>,
+          
           <Button
             key={`${uniqueId()}`}
             onClick={() => {
@@ -195,8 +185,8 @@ export default function ReadItem({ config, selectedItem }) {
         </Row>
       </PageHeader>
       <Divider dashed />
-      <Descriptions title={`Client : ${currentErp.client.company}`}>
-        <Descriptions.Item label="Address">{currentErp.client.address}</Descriptions.Item>
+      <Descriptions title={`Client : ${currentErp.client.branch.branchName}`}>
+        <Descriptions.Item label="Address">{currentErp.client.branch.address}</Descriptions.Item>
         <Descriptions.Item label="E-mail">{currentErp.client.email}</Descriptions.Item>
         <Descriptions.Item label="Phone">{currentErp.client.phone}</Descriptions.Item>
       </Descriptions>
@@ -206,7 +196,14 @@ export default function ReadItem({ config, selectedItem }) {
           <Typography.Title level={5}>Payment Information :</Typography.Title>
         </Col>
         <Col sm={24} md={12} style={{ textAlign: 'right' }}>
-          <Button icon={<ExportOutlined />}>Show invoice</Button>
+          {/*<Button
+            key={`${uniqueId()}`}
+            onClick={() => history.push(`/confirmation/read/${currentErp._id}`)}
+            icon={<FileTextOutlined />}
+          >
+            Show Invoice
+          </Button>*/}
+          
         </Col>
       </Row>
       <div
@@ -251,3 +248,17 @@ export default function ReadItem({ config, selectedItem }) {
     </>
   );
 }
+
+
+{/*<Button
+            key={`${uniqueId()}`}
+            onClick={() => {
+              window.open(
+                `${DOWNLOAD_BASE_URL}${entity}/${entity}-${currentErp._id}.pdf`,
+                '_blank'
+              );
+            }}
+            icon={<FilePdfOutlined />}
+          >
+            Download PDF
+          </Button>,*/}

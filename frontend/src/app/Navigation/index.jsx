@@ -41,7 +41,7 @@ const PERSONAS_SUBMENU = [
 ];
 
 const QUOTES_SUBMENU = [
-  { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
+  { key: '/invoice', icon: <FileTextOutlined />, title: 'Quotation' },
   { key: '/invoice/expired', icon: <FileSyncOutlined />, title: 'Expired' },
 ];
 

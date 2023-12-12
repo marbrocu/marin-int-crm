@@ -120,10 +120,11 @@ const update = async (req, res) => {
     body['paymentStatus'] = paymentStatus;
 
 
-
-    const availableItemsarray = fromPurchase.items.some((item) => {
+    let availableItemsarray = false;
+    let sameCounter = 0
+    for (const item of fromPurchase.items) {
       let totalAvailable = 0; // Initialize the total available quantity for the current item
-    
+      
       item.available.forEach((avail) => {
         const values = Object.values(avail);
         if (values.length > 0) {
@@ -131,14 +132,22 @@ const update = async (req, res) => {
           totalAvailable += availValue; // Accumulate the available quantities
         }
       });
-      console.log(totalAvailable)
-      console.log(item.quantity)
-      if (totalAvailable === item.quantity){
-        quoteStatus = "completed"
-      }
+      
+      console.log(totalAvailable);
+      console.log(item.quantity);
+      
       // Compare the total available quantity with the item's quantity
-      return totalAvailable > item.quantity;
-    });
+      if (totalAvailable > item.quantity) {
+        availableItemsarray = true;
+        break; // Exit the loop if any item has more available quantity than its specified quantity
+      }
+      else if(totalAvailable === item.quantity){
+        sameCounter = sameCounter+1
+        if(sameCounter === fromPurchase.items.length){
+          quoteStatus = "completed"
+        }
+      }
+    }
     
     if (availableItemsarray) {
       return res.status(409).json({
