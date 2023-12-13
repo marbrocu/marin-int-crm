@@ -14,6 +14,11 @@ const quoteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  currency: {
+    type: String,
+    default: "usd",
+    required: true,
+  },
   year: {
     type: Number,
     required: true,
@@ -41,6 +46,10 @@ const quoteSchema = new mongoose.Schema({
   shipment: {
     type: String,
     required: false,
+  },
+  paymenttype: {
+    type: String,
+    required: true,
   },
   purchasefile: {
     type: String,

@@ -81,6 +81,8 @@ const convertQuoteToInvoice = async (req, res) => {
       expiredDatePayment: moment().add(1, 'month'),
       expiredDateShipment: moment().add(1, 'month'),
       shipment: quote.shipment,
+      paymenttype: quote.paymenttype,
+      currency:quote.currency,
       client: quote.client,
       supplier: quote.supplier,
       purchase: quote._id,

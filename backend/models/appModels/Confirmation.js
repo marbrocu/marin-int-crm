@@ -26,6 +26,15 @@ const confirmationSchema = new mongoose.Schema({
     type: String,
     default: '0',
   },
+  currency: {
+    type: String,
+    required: true,
+    default: 'usd',
+  },
+  paymenttype: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     required: true,

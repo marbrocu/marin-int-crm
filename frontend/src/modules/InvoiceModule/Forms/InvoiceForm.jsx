@@ -170,7 +170,29 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             <Input />
           </Form.Item>
         </Col>
+        <Col className="gutter-row" span={6}>
+          <Form.Item
+            label="Currency"
+            name="currency"
+            rules={[
+              {
+                required: true,
+                message: 'Please input currency!',
+              },
+            ]}
+            initialValue={'usd'}
+          >
+            <Select
+              options={[
+                { value: 'usd', label: 'USD' },
+                { value: 'mxn', label: 'MXN' },
+                { value: 'eur', label: 'EUR' },
+              ]}
+            ></Select>
+          </Form.Item>
+        </Col>
       </Row>
+      
       <Row gutter={[12, 0]}>
         <Col className="gutter-row" span={9}>
           <Form.Item

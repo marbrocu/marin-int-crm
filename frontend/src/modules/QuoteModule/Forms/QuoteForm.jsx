@@ -151,6 +151,27 @@ export default function QuoteForm({ subTotal = 0, current = null }) {
           >
             <Input />
           </Form.Item>
+          
+        </Col>
+        <Col className="gutter-row" span={6}>
+          <Form.Item
+            label="Payment Type"
+            name="paymenttype"
+            rules={[
+              {
+                required: true,
+                message: 'Please input type of payment!',
+              },
+            ]}
+            initialValue={'credit'}
+          >
+            <Select
+              options={[
+                { value: 'credit', label: 'Credit' },
+                { value: 'advanced', label: 'Advanced' },
+              ]}
+            ></Select>
+          </Form.Item>
         </Col>
       </Row>
 

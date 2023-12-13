@@ -103,6 +103,7 @@ const create = async (req, res) => {
     body['taxTotal'] = taxTotal;
     body['total'] = total;
     body['items'] = items;
+    body['currency'] = items[0].currency;
     body['client'] = invoices[0].client
     body['supplier'] = invoices[0].supplier
 

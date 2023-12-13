@@ -6,6 +6,7 @@ const schema = Joi.object({
   year: Joi.number().required(),
   status: Joi.string().required(),
   note: Joi.string().allow(''),
+  currency: Joi.string().allow(''),
   requisitionfile: Joi.string().allow(''),
   quotationfile: Joi.string().allow(''),
   expiredDate: Joi.date().required(),
