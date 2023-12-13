@@ -1,32 +1,36 @@
 const mongoose = require('mongoose');
 
 const Model = mongoose.model('PaymentInvoice');
-const Invoice = mongoose.model('Invoice');
+const Confirmation = mongoose.model('Confirmation');
 const custom = require('@/controllers/middlewaresControllers/pdfController');
 
 const { calculate } = require('@/helpers');
 
 const create = async (req, res) => {
   try {
+    console.log(req.body)
     // Creating a new document in the collection
-    if (req.body.amount === 0) {
+    /*if (req.body.amount === 0) {
       return res.status(202).json({
         success: false,
         result: null,
         message: `The Minimum Amount couldn't be 0`,
       });
-    }
+    }*/
 
-    const currentInvoice = await Invoice.findOne({
+    const currentConfirmation = await Confirmation.findOne({
       _id: req.body.invoice,
       removed: false,
     });
+    
+
+    //console.log(currentConfirmation)
 
     const {
       total: previousTotal,
       discount: previousDiscount,
       credit: previousCredit,
-    } = currentInvoice;
+    } = currentConfirmation;
 
     const maxAmount = calculate.sub(calculate.sub(previousTotal, previousDiscount), previousCredit);
 
@@ -39,8 +43,10 @@ const create = async (req, res) => {
     }
 
     const result = await Model.create(req.body);
+    
 
     const fileId = 'payment-invoice-report-' + result._id + '.pdf';
+    
     const updatePath = await Model.findOneAndUpdate(
       { _id: result._id.toString(), removed: false },
       { pdfPath: fileId },
@@ -48,10 +54,17 @@ const create = async (req, res) => {
         new: true,
       }
     ).exec();
+    
     // Returning successfull response
-
+    
+    
+    console.log("result")
     const { _id: paymentInvoiceId, amount } = result;
-    const { id: invoiceId, total, discount, credit } = currentInvoice;
+    const { id: invoiceId, total, discount, credit } = currentConfirmation;
+    console.log(invoiceId)
+    console.log(total)
+    console.log(discount)
+    console.log(credit)
 
     let paymentStatus =
       calculate.sub(total, discount) === calculate.add(credit, amount)
@@ -59,11 +72,13 @@ const create = async (req, res) => {
         : calculate.add(credit, amount) > 0
         ? 'partially'
         : 'unpaid';
-
-    const invoiceUpdate = await Invoice.findOneAndUpdate(
+    
+    console.log("try")
+    console.log(req.body.invoice)
+    const invoiceUpdate = await Confirmation.findOneAndUpdate(
       { _id: req.body.invoice },
       {
-        $push: { paymentInvoice: paymentInvoiceId.toString() },
+        $push: { payment: paymentInvoiceId.toString() },
         $inc: { credit: amount },
         $set: { paymentStatus: paymentStatus },
       },
@@ -82,7 +97,7 @@ const create = async (req, res) => {
     res.status(200).json({
       success: true,
       result: updatePath,
-      message: 'Payment Invoice created successfully',
+      message: 'Payment created successfully',
     });
   } catch (err) {
     // If err is thrown by Mongoose due to required validations

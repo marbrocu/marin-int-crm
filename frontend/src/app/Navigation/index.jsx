@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
 
 import { useAppContext } from '@/context/appContext';
-import logoIcon from '@/style/images/logo-icon.svg';
-import logoText from '@/style/images/logo-text.svg';
+import logoIcon from '@/style/images/logo-icon.png';
+import logoText from '@/style/images/logo-text.png';
 import history from '@/utils/history';
 
 import {
@@ -21,16 +21,35 @@ import {
   FileOutlined,
 } from '@ant-design/icons';
 
-const SIDEBAR_MENU = [
+const SIDEBAR_MENU_REL = [
   { key: '/', icon: <DashboardOutlined />, title: 'Dashboard' },
-  { key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
-  { key: '/offer', icon: <FileOutlined />, title: 'Offer' },
+];
+
+const SIDEBAR_MENU_IRREL = [
+
+  //{ key: '/lead', icon: <UserAddOutlined />, title: 'Lead' },
+  { key: '/admin', icon: <UserOutlined />, title: 'Admin' },
+  
+];
+
+const PERSONAS_SUBMENU = [
+  { key: '/employee', icon: <TeamOutlined />, title: 'Employee' },
   { key: '/customer', icon: <CustomerServiceOutlined />, title: 'Customer' },
-  { key: '/invoice', icon: <FileTextOutlined />, title: 'Invoice' },
-  { key: '/quote', icon: <FileSyncOutlined />, title: 'Quote' },
-  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payment Invoice' },
-  { key: '/employee', icon: <UserOutlined />, title: 'Employee' },
-  { key: '/admin', icon: <TeamOutlined />, title: 'Admin' },
+  { key: '/supplier', icon: <UserAddOutlined />, title: 'Supplier' },
+  { key: '/branch', icon: <UserAddOutlined />, title: 'Branches' },
+  { key: '/company', icon: <UserAddOutlined />, title: 'Companies' },
+];
+
+const QUOTES_SUBMENU = [
+  { key: '/invoice', icon: <FileTextOutlined />, title: 'Quotation' },
+  { key: '/invoice/expired', icon: <FileSyncOutlined />, title: 'Expired' },
+];
+
+const PURCHASE_SUBMENU = [
+  { key: '/quote', icon: <FileOutlined />, title: 'Purchase' },
+  { key: '/confirmation', icon: <FileOutlined />, title: 'Confirmation' },
+  //{ key: '/offer', icon: <FileOutlined />, title: 'Offer' },
+  { key: '/payment/invoice', icon: <CreditCardOutlined />, title: 'Payments' },
 ];
 
 const SETTINGS_SUBMENU = [
@@ -104,7 +123,38 @@ function Sidebar({ collapsible }) {
           )}
         </div>
         <Menu mode="inline" selectedKeys={[currentPath]}>
-          {SIDEBAR_MENU.map((menuItem) => (
+          {SIDEBAR_MENU_REL.map((menuItem) => (
+            <Menu.Item key={menuItem.key} icon={menuItem.icon}>
+              <Link to={menuItem.key} />
+              {menuItem.title}
+            </Menu.Item>
+          ))}
+          <SubMenu key={'Personas'} icon={<UserOutlined />} title={'People'}>
+            {PERSONAS_SUBMENU.map((menuItem) => (
+              <Menu.Item key={menuItem.key}>
+                <Link to={menuItem.key} />
+                {menuItem.title}
+              </Menu.Item>
+            ))}
+          </SubMenu>
+          <SubMenu key={'Cotizaciones'} icon={<FileTextOutlined />} title={'Quotes'}>
+            {QUOTES_SUBMENU.map((menuItem) => (
+              <Menu.Item key={menuItem.key}>
+                <Link to={menuItem.key} />
+                {menuItem.title}
+              </Menu.Item>
+            ))}
+          </SubMenu>
+          <SubMenu key={'OrdenCompra'} icon={<CreditCardOutlined />} title={'Purchase'}>
+            {PURCHASE_SUBMENU.map((menuItem) => (
+              <Menu.Item key={menuItem.key}>
+                <Link to={menuItem.key} />
+                {menuItem.title}
+              </Menu.Item>
+            ))}
+          </SubMenu>
+          
+          {SIDEBAR_MENU_IRREL.map((menuItem) => (
             <Menu.Item key={menuItem.key} icon={menuItem.icon}>
               <Link to={menuItem.key} />
               {menuItem.title}

@@ -11,6 +11,7 @@ import useResponsiveTable from '@/hooks/useResponsiveTable';
 
 export default function DataTable({ config, DropDownRowMenu, AddNewItem }) {
   let { entity, dataTableColumns, DATATABLE_TITLE } = config;
+  console.log(entity)
   // console.log('entity from components->dataTable', entity);
   // console.log('config from components->dataTable', config);
   dataTableColumns = [

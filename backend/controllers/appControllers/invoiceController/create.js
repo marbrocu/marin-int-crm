@@ -59,7 +59,7 @@ const create = async (req, res) => {
     ).exec();
     // Returning successfull response
 
-    custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
+    //custom.generatePdf('Invoice', { filename: 'invoice', format: 'A4' }, result);
 
     // Returning successfull response
     return res.status(200).json({

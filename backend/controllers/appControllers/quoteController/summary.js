@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const moment = require('moment');
 
-const Model = mongoose.model('Invoice');
+const Model = mongoose.model('Quote');
 
 const summary = async (req, res) => {
   try {
@@ -25,7 +25,7 @@ const summary = async (req, res) => {
     let startDate = currentDate.clone().startOf(defaultType);
     let endDate = currentDate.clone().endOf(defaultType);
 
-    const statuses = ['draft', 'pending', 'sent', 'expired', 'declined', 'accepted'];
+    const statuses = ['completed', 'pending', 'expired'];
 
     const result = await Model.aggregate([
       {
@@ -79,6 +79,7 @@ const summary = async (req, res) => {
         },
       },
     ]);
+    //console.log(result)
 
     statuses.forEach((status) => {
       const found = result.find((item) => item.status === status);

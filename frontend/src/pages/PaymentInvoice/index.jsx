@@ -18,7 +18,12 @@ export default function PaymentInvoice() {
     },
     {
       title: 'Client',
-      dataIndex: ['client', 'company'],
+      render: (record) => {
+        if (record.client && record.client.branch && record.client.branch.branchName) {
+          return record.client.branch.branchName;
+        }
+        return ''; // Or any default value when the property is undefined
+      },
     },
     {
       title: 'Amount',
@@ -32,11 +37,11 @@ export default function PaymentInvoice() {
       },
     },
     {
-      title: 'Invoice Number',
+      title: 'Confirmation Number',
       dataIndex: ['invoice', 'number'],
     },
     {
-      title: 'Invoice year',
+      title: 'Confirmation year',
       dataIndex: ['invoice', 'year'],
     },
     {

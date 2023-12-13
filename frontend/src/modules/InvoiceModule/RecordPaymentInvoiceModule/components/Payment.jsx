@@ -70,7 +70,7 @@ export default function Payment({ config, currentItem }) {
               </Button>,
               <Button
                 key={`${uniqueId()}`}
-                onClick={() => history.push(`/invoice/read/${currentErp._id}`)}
+                onClick={() => history.push(`/confirmation/read/${currentErp._id}`)}
                 icon={<FileTextOutlined />}
               >
                 Show Invoice

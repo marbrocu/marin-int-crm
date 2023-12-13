@@ -10,65 +10,36 @@ const supplierSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  company: {
+  branch: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Branch',
+    required: true,
+    autopopulate: true,
+  },
+  name: {
     type: String,
     trim: true,
     required: true,
   },
-  managerName: {
+  surname: {
     type: String,
     trim: true,
     required: true,
-  },
-  managerSurname: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  bankAccount: {
-    type: String,
-    trim: true,
-  },
-  RC: {
-    type: String,
-    trim: true,
-  },
-  AI: {
-    type: String,
-    trim: true,
-  },
-  NIF: {
-    type: String,
-    trim: true,
-  },
-  NIS: {
-    type: String,
-    trim: true,
   },
   address: {
     type: String,
     trim: true,
   },
-  tel: {
+  phone: {
     type: String,
     trim: true,
     required: true,
   },
-  fax: {
-    type: String,
-    trim: true,
-  },
-  cell: {
-    type: String,
-    trim: true,
-  },
   email: {
     type: String,
     trim: true,
-  },
-  website: {
-    type: String,
-    trim: true,
+    lowercase: true,
+    unique: true,
   },
   created: {
     type: Date,
@@ -76,4 +47,5 @@ const supplierSchema = new mongoose.Schema({
   },
 });
 
+supplierSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('Supplier', supplierSchema);

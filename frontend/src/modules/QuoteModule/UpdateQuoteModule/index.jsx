@@ -2,7 +2,7 @@ import { Button, Result } from 'antd';
 
 import { ErpLayout } from '@/layout';
 import UpdateItem from '@/modules/ErpPanelModule/UpdateItem';
-import QuoteForm from '@/modules/QuoteModule/Forms/QuoteForm';
+import QuoteForm from '@/modules/QuoteModule/Forms/QuoteFormUpdate';
 
 import PageLoader from '@/components/PageLoader';
 

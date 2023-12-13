@@ -46,9 +46,7 @@ export default function DataTableDropMenu({ row, entity }) {
       <Menu.Item key={`${uniqueId()}`} icon={<EyeOutlined />} onClick={Read}>
         Show
       </Menu.Item>
-      <Menu.Item key={`${uniqueId()}`} icon={<CreditCardOutlined />} onClick={RecordPayment}>
-        Record Payment
-      </Menu.Item>
+      
       <Menu.Item key={`${uniqueId()}`} icon={<EditOutlined />} onClick={Edit}>
         Edit
       </Menu.Item>
@@ -61,3 +59,8 @@ export default function DataTableDropMenu({ row, entity }) {
     </Menu>
   );
 }
+
+
+//<Menu.Item key={`${uniqueId()}`} icon={<CreditCardOutlined />} onClick={RecordPayment}>
+//Record Payment
+//</Menu.Item>

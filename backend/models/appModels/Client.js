@@ -10,55 +10,23 @@ const clientSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  company: {
-    type: String,
-    trim: true,
-    unique: true,
+  branch: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Branch',
     required: true,
+    autopopulate: true,
   },
-  managerName: {
-    type: String,
-    trim: true,
-    required: true,
-  },
-  managerSurname: {
+  name: {
     type: String,
     trim: true,
     required: true,
   },
-  bankAccount: {
+  surname: {
     type: String,
     trim: true,
+    required: true,
   },
-  companyRegNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxNumber: {
-    type: String,
-    trim: true,
-  },
-  companyTaxID: {
-    type: String,
-    trim: true,
-  },
-  customField: [
-    {
-      fieldName: {
-        type: String,
-        trim: true,
-      },
-      fieldValue: {
-        type: String,
-        trim: true,
-      },
-    },
-  ],
   address: {
-    type: String,
-    trim: true,
-  },
-  country: {
     type: String,
     trim: true,
   },
@@ -67,28 +35,16 @@ const clientSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
-  fax: {
-    type: String,
-    trim: true,
-  },
-  cell: {
-    type: String,
-    trim: true,
-  },
   email: {
     type: String,
     trim: true,
     lowercase: true,
     unique: true,
   },
-  website: {
-    type: String,
-    trim: true,
-  },
   created: {
     type: Date,
     default: Date.now,
   },
 });
-
+clientSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('Client', clientSchema);

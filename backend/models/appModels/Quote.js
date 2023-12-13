@@ -11,7 +11,12 @@ const quoteSchema = new mongoose.Schema({
     default: false,
   },
   number: {
-    type: Number,
+    type: String,
+    required: true,
+  },
+  currency: {
+    type: String,
+    default: "usd",
     required: true,
   },
   year: {
@@ -32,6 +37,31 @@ const quoteSchema = new mongoose.Schema({
     required: true,
     autopopulate: true,
   },
+  supplier: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Supplier',
+    required: true,
+    autopopulate: true,
+  },
+  shipment: {
+    type: String,
+    required: false,
+  },
+  paymenttype: {
+    type: String,
+    required: true,
+  },
+  purchasefile: {
+    type: String,
+    required: false,
+  },
+  frominvoices:[{
+    invoiceNumber: {
+      type: String,
+      required: true,
+    },
+  }
+  ],
   items: [
     {
       itemName: {
@@ -44,6 +74,10 @@ const quoteSchema = new mongoose.Schema({
       quantity: {
         type: Number,
         required: true,
+      },
+      available: {
+        type: Array,
+        required: false,
       },
       price: {
         type: Number,
@@ -80,7 +114,7 @@ const quoteSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: 'draft',
+    default: 'pending',
   },
   pdfPath: {
     type: String,

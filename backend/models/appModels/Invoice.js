@@ -7,7 +7,7 @@ const invoiceSchema = new mongoose.Schema({
     default: false,
   },
   number: {
-    type: Number,
+    type: String,
     required: true,
   },
   year: {
@@ -26,11 +26,30 @@ const invoiceSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  currency: {
+    type: String,
+    required: true,
+    default: 'usd',
+  },
   client: {
     type: mongoose.Schema.ObjectId,
     ref: 'Client',
     required: true,
     autopopulate: true,
+  },
+  supplier: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Supplier',
+    required: true,
+    autopopulate: true,
+  },
+  requisitionfile: {
+    type: String,
+    required: false,
+  },
+  quotationfile: {
+    type: String,
+    required: false,
   },
   items: [
     {
@@ -44,6 +63,10 @@ const invoiceSchema = new mongoose.Schema({
       quantity: {
         type: Number,
         required: true,
+      },
+      available: {
+        type: Number,
+        required: false,
       },
       price: {
         type: Number,
@@ -78,16 +101,6 @@ const invoiceSchema = new mongoose.Schema({
   discount: {
     type: Number,
     default: 0,
-  },
-  paymentInvoice: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: 'PaymentInvoice',
-    },
-  ],
-  paymentStatus: {
-    type: String,
-    default: 'unpaid',
   },
   note: {
     type: String,

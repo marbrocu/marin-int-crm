@@ -1,12 +1,12 @@
 const entity = 'payment/invoice';
 
 const Labels = {
-  PANEL_TITLE: 'Payment Invoice',
-  dataTableTitle: 'Payment Invoices Lists',
-  DATATABLE_TITLE: 'Payment Invoices List',
-  ENTITY_NAME: 'Payment Invoice',
-  CREATE_ENTITY: 'Save payment invoice',
-  UPDATE_ENTITY: 'Update payment invoice',
+  PANEL_TITLE: 'Payments',
+  dataTableTitle: 'Payments Lists',
+  DATATABLE_TITLE: 'Payments List',
+  ENTITY_NAME: 'Payments',
+  CREATE_ENTITY: 'Save payment',
+  UPDATE_ENTITY: 'Update payment',
 };
 
 const configPage = {

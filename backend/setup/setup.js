@@ -13,8 +13,8 @@ async function setupApp() {
     await new Admin({
       email: 'admin@demo.com',
       password: passwordHash,
-      name: 'Salah Eddine',
-      surname: 'Lalami',
+      name: 'Marco',
+      surname: 'Brown',
       role: 'admin',
     }).save();
 

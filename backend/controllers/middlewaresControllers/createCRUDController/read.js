@@ -1,7 +1,7 @@
 const read = async (Model, req, res) => {
   try {
     // Find document by id
-    const result = await Model.findOne({ _id: req.params.id, removed: false });
+    const result = await Model.findOne({ _id: req.params.id });
     // If no results found, return document not found
     if (!result) {
       return res.status(404).json({

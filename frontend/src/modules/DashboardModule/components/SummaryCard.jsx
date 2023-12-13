@@ -10,10 +10,10 @@ export default function AnalyticSummaryCard({
   return (
     <Col
       className="gutter-row"
-      xs={{ span: 24 }}
-      sm={{ span: 12 }}
-      md={{ span: 12 }}
-      lg={{ span: 6 }}
+      xs={{ span: 12 }}
+      sm={{ span: 10 }}
+      md={{ span: 10 }}
+      lg={{ span: 4}}
     >
       <div
         className="whiteBox shadow"
@@ -25,9 +25,9 @@ export default function AnalyticSummaryCard({
           </h3>
         </div>
         <Divider style={{ padding: 0, margin: 0 }}></Divider>
-        <div className="pad15">
+        <div className="pad5">
           <Row gutter={[0, 0]} justify="space-between" wrap={false}>
-            <Col className="gutter-row" flex="70px" style={{ textAlign: 'left' }}>
+            <Col className="gutter-row" flex="10px" style={{ textAlign: 'left' }}>
               <div className="left" style={{ whiteSpace: 'nowrap' }}>
                 {prefix}
               </div>
@@ -35,7 +35,7 @@ export default function AnalyticSummaryCard({
             <Divider
               style={{
                 height: '100%',
-                padding: '10px 0',
+                padding: '3px 0',
                 justifyContent: 'center',
                 alignItems: 'center',
               }}
@@ -59,6 +59,7 @@ export default function AnalyticSummaryCard({
                     style={{
                       margin: '0 auto',
                       justifyContent: 'center',
+                      padding: '2px 1px',
                       maxWidth: '110px',
                       overflow: 'hidden',
                       whiteSpace: 'nowrap',

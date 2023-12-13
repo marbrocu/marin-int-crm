@@ -1,11 +1,11 @@
 import { ErpLayout } from '@/layout';
-import CreateItem from '@/modules/ErpPanelModule/CreateItem';
+import CreateInvoiceItem from '@/modules/ErpPanelModule/CreateInvoiceItem';
 import QuoteForm from '@/modules/QuoteModule/Forms/QuoteForm';
 
 export default function CreateQuoteModule({ config }) {
   return (
     <ErpLayout>
-      <CreateItem config={config} CreateForm={QuoteForm} />
+      <CreateInvoiceItem config={config} CreateForm={QuoteForm} />
     </ErpLayout>
   );
 }

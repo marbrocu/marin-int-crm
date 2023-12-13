@@ -76,10 +76,12 @@ const summary = async (req, res) => {
         },
       },
     ];
+    
 
     const aggregationResult = await Model.aggregate(pipeline);
 
     const result = aggregationResult[0];
+    //console.log(result)
     const totalClients = result.totalClients[0] ? result.totalClients[0].count : 0;
     const totalNewClients = result.newClients[0] ? result.newClients[0].count : 0;
     const activeClients = result.activeClients[0] ? result.activeClients[0].count : 0;

@@ -119,6 +119,27 @@ const request = {
       return errorHandler(error);
     }
   },
+  listExpired: async ({ entity, options = {} }) => {
+    try {
+      let query = '?';
+      for (var key in options) {
+        query += key + '=' + options[key] + '&';
+      }
+      query = query.slice(0, -1);
+      
+      const response = await axios.get(entity + '/listExpired' + query);
+      console.log("success")
+      successHandler(response, {
+        notifyOnSuccess: false,
+        notifyOnFailed: false,
+      });
+      //console.log(response.data)
+      return response.data;
+    } catch (error) {
+      console.log("error data")
+      return errorHandler(error);
+    }
+  },
   listAll: async ({ entity }) => {
     try {
       const response = await axios.get(entity + '/listAll');

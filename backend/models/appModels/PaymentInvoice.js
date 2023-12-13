@@ -19,7 +19,7 @@ const paymentInvoiceSchema = new mongoose.Schema({
   },
   invoice: {
     type: mongoose.Schema.ObjectId,
-    ref: 'Invoice',
+    ref: 'Confirmation',
     required: true,
     autopopulate: true,
   },

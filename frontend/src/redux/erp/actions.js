@@ -66,6 +66,44 @@ export const erp = {
         });
       }
     },
+    listExpired:
+    ({ entity, options = { page: 1, items: 10 } }) =>
+    async (dispatch) => {
+      dispatch({
+        type: actionTypes.REQUEST_LOADING,
+        keyState: 'listExpired',
+        payload: null,
+      });
+
+
+      let data = await request.listExpired({ entity, options });
+      //console.log(data)
+
+      //console.log("trying but not")
+
+      if (data.success === true) {
+        const result = {
+          items: data.result,
+          pagination: {
+            current: parseInt(data.pagination.page, 10),
+            pageSize: options?.items || 10,
+            total: parseInt(data.pagination.count, 10),
+          },
+        };
+        //console.log(result)
+        dispatch({
+          type: actionTypes.REQUEST_SUCCESS,
+          keyState: 'list',
+          payload: result,
+        });
+      } else {
+        dispatch({
+          type: actionTypes.REQUEST_FAILED,
+          keyState: 'list',
+          payload: null,
+        });
+      }
+    },
   create:
     ({ entity, jsonData }) =>
     async (dispatch) => {

@@ -8,7 +8,7 @@ import { DatePicker } from '@/components/CustomAntd';
 
 import AutoCompleteAsync from '@/components/AutoCompleteAsync';
 
-import ItemRow from '@/modules/ErpPanelModule/ItemRow';
+import ItemRow from '@/modules/ErpPanelModule/ItemRowInvoice';
 
 import MoneyInputFormItem from '@/components/MoneyInputFormItem';
 
@@ -58,25 +58,25 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
           >
             <AutoCompleteAsync
               entity={'client'}
-              displayLabels={['company']}
-              searchFields={'company'}
+              displayLabels={['email']}
+              searchFields={['company', 'email']}
               // onUpdateValue={autoCompleteUpdate}
             />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
           <Form.Item
-            label="Number"
+            label="Invoice Number"
             name="number"
-            initialValue={1}
+            //initialValue={1}
             rules={[
-              {
-                required: true,
+              ({ getFieldValue }) => ({
+                required: getFieldValue('status') === 'quotation',
                 message: 'Please input invoice number!',
-              },
+              }),
             ]}
           >
-            <InputNumber min={1} style={{ width: '100%' }} />
+            <Input style={{ width: '100%' }} />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={5}>
@@ -104,20 +104,33 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 message: 'Please input invoice status!',
               },
             ]}
-            initialValue={'draft'}
+            initialValue={'requisition'}
           >
             <Select
               options={[
-                { value: 'draft', label: 'Draft' },
-                { value: 'pending', label: 'Pending' },
-                { value: 'sent', label: 'Sent' },
+                { value: 'requisition', label: 'Requisition' },
+                { value: 'quotation', label: 'Quotation' },
               ]}
             ></Select>
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={9}>
-          <Form.Item label="Note" name="note">
-            <Input />
+          <Form.Item
+            name="supplier"
+            label="Supplier"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your supplier!',
+              },
+            ]}
+          >
+            <AutoCompleteAsync
+              entity={'supplier'}
+              displayLabels={['email']}
+              searchFields={['company', 'email']}
+              // onUpdateValue={autoCompleteUpdate}
+            />
           </Form.Item>
         </Col>
         <Col className="gutter-row" span={8}>
@@ -148,6 +161,80 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
             initialValue={dayjs().add(30, 'days')}
           >
             <DatePicker style={{ width: '100%' }} format={'DD/MM/YYYY'} />
+          </Form.Item>
+        </Col>
+      </Row>
+      <Row gutter={[12, 0]}>
+        <Col className="gutter-row" span = {18}>
+          <Form.Item label="Note" name="note">
+            <Input />
+          </Form.Item>
+        </Col>
+        <Col className="gutter-row" span={6}>
+          <Form.Item
+            label="Currency"
+            name="currency"
+            rules={[
+              {
+                required: true,
+                message: 'Please input currency!',
+              },
+            ]}
+            initialValue={'usd'}
+          >
+            <Select
+              options={[
+                { value: 'usd', label: 'USD' },
+                { value: 'mxn', label: 'MXN' },
+                { value: 'eur', label: 'EUR' },
+              ]}
+            ></Select>
+          </Form.Item>
+        </Col>
+      </Row>
+      
+      <Row gutter={[12, 0]}>
+        <Col className="gutter-row" span={9}>
+          <Form.Item
+            label="URL Requisition"
+            name="requisitionfile"
+            rules={[
+              {
+                required: false,
+                message: 'Please input a URL for the requisition file!',
+              },
+              {
+                type: 'string', // Define the type of input expected
+                pattern: new RegExp(
+                  '^(https?://)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.([a-z]+)?$'
+                ), // Define the regular expression for URL validation
+                message: 'Please enter a valid URL', // Error message to display if the URL is invalid
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+        </Col>
+
+        <Col className="gutter-row" span={9}>
+          <Form.Item
+            label="URL Quotation"
+            name="quotationfile"
+            rules={[({ getFieldValue }) => ({
+              required: getFieldValue('status') === 'quotation',
+              message: 'Please input Quotation file!',
+            }),
+          
+              {
+                type: 'string', // Define the type of input expected
+                pattern: new RegExp(
+                  '^(https?://)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.([a-z]+)?$'
+                ), // Define the regular expression for URL validation
+                message: 'Please enter a valid URL', // Error message to display if the URL is invalid
+              },
+            ]}
+          >
+            <Input />
           </Form.Item>
         </Col>
       </Row>
@@ -231,7 +318,7 @@ export default function InvoiceForm({ subTotal = 0, current = null }) {
                 bordered={false}
                 options={[
                   { value: 0, label: 'Tax 0 %' },
-                  { value: 0.19, label: 'Tax 19 %' },
+                  { value: 0.16, label: 'Tax 16 %' },
                 ]}
               ></Select>
             </Form.Item>

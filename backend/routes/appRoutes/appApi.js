@@ -11,8 +11,11 @@ const leadController = require('@/controllers/appControllers/leadController');
 const invoiceController = require('@/controllers/appControllers/invoiceController');
 const itemController = require('@/controllers/appControllers/itemController');
 const quoteController = require('@/controllers/appControllers/quoteController');
+const confirmationController = require('@/controllers/appControllers/confirmationController');
 const supplierController = require('@/controllers/appControllers/supplierController');
 const supplierOrderController = require('@/controllers/appControllers/supplierOrderController');
+const branchController = require('@/controllers/appControllers/branchController/branchController');
+const companyController = require('@/controllers/appControllers/companyController');
 const expenseController = require('@/controllers/appControllers/expenseController');
 const expenseCategoryController = require('@/controllers/appControllers/expenseCategoryController');
 const paymentInvoiceController = require('@/controllers/appControllers/paymentInvoiceController');
@@ -64,6 +67,7 @@ router.route('/invoice/update/:id').patch(catchErrors(invoiceController.update))
 router.route('/invoice/delete/:id').delete(catchErrors(invoiceController.delete));
 router.route('/invoice/search').get(catchErrors(invoiceController.search));
 router.route('/invoice/list').get(catchErrors(invoiceController.list));
+router.route('/invoice/listExpired').get(catchErrors(invoiceController.listExpired));
 router.route('/invoice/filter').get(catchErrors(invoiceController.filter));
 router.route('/invoice/pdf/:id').get(catchErrors(invoiceController.generatePDF));
 router.route('/invoice/summary').get(catchErrors(invoiceController.summary));
@@ -92,6 +96,20 @@ router.route('/quote/summary').get(catchErrors(quoteController.summary));
 router.route('/quote/convert/:id').get(catchErrors(quoteController.convertQuoteToInvoice));
 router.route('/quote/mail').post(catchErrors(quoteController.sendMail));
 
+
+// //_________________________________________________________________API for confirmations_____________________
+router.route('/confirmation/create').post(catchErrors(confirmationController.create));
+router.route('/confirmation/read/:id').get(catchErrors(confirmationController.read));
+router.route('/confirmation/update/:id').patch(catchErrors(confirmationController.update));
+router.route('/confirmation/delete/:id').delete(catchErrors(confirmationController.delete));
+router.route('/confirmation/search').get(catchErrors(confirmationController.search));
+router.route('/confirmation/list').get(catchErrors(confirmationController.list));
+router.route('/confirmation/listExpired').get(catchErrors(confirmationController.listExpired));
+router.route('/confirmation/filter').get(catchErrors(confirmationController.filter));
+router.route('/confirmation/pdf/:id').get(catchErrors(confirmationController.generatePDF));
+router.route('/confirmation/summary').get(catchErrors(confirmationController.summary));
+router.route('/confirmation/mail').post(catchErrors(confirmationController.sendMail));
+
 // //___________________________________________ API for suppliers _____________________
 router.route('/supplier/create').post(catchErrors(supplierController.create));
 router.route('/supplier/read/:id').get(catchErrors(supplierController.read));
@@ -109,6 +127,24 @@ router.route('/supplierOrder/delete/:id').delete(catchErrors(supplierOrderContro
 router.route('/supplierOrder/search').get(catchErrors(supplierOrderController.search));
 router.route('/supplierOrder/list').get(catchErrors(supplierOrderController.list));
 router.route('/supplierOrder/filter').get(catchErrors(supplierOrderController.filter));
+
+// //___________________________________________ API for branches _____________________
+router.route('/branch/create').post(catchErrors(branchController.create));
+router.route('/branch/read/:id').get(catchErrors(branchController.read));
+router.route('/branch/update/:id').patch(catchErrors(branchController.update));
+router.route('/branch/delete/:id').delete(catchErrors(branchController.delete));
+router.route('/branch/search').get(catchErrors(branchController.search));
+router.route('/branch/list').get(catchErrors(branchController.list));
+router.route('/branch/filter').get(catchErrors(branchController.filter));
+
+// //___________________________________________ API for companies _____________________
+router.route('/company/create').post(catchErrors(companyController.create));
+router.route('/company/read/:id').get(catchErrors(companyController.read));
+router.route('/company/update/:id').patch(catchErrors(companyController.update));
+router.route('/company/delete/:id').delete(catchErrors(companyController.delete));
+router.route('/company/search').get(catchErrors(companyController.search));
+router.route('/company/list').get(catchErrors(companyController.list));
+router.route('/company/filter').get(catchErrors(companyController.filter));
 
 // //_________________________________________________________________API for expenses_____________________
 

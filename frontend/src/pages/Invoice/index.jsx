@@ -11,7 +11,7 @@ export default function Invoice() {
     displayLabels: ['name', 'surname'],
     searchFields: 'name,surname,birthday',
   };
-  const entityDisplayLabels = ['number', 'client.company'];
+  const entityDisplayLabels = ['number', 'client.email', 'supplier.email'];
   const dataTableColumns = [
     {
       title: 'Number',
@@ -19,7 +19,11 @@ export default function Invoice() {
     },
     {
       title: 'Client',
-      dataIndex: ['client', 'company'],
+      dataIndex: ['client', 'email'],
+    },
+    {
+      title: 'Supplier',
+      dataIndex: ['supplier', 'email'],
     },
     {
       title: 'Date',
@@ -41,33 +45,12 @@ export default function Invoice() {
       render: (amount) => moneyRowFormatter({ amount }),
     },
     {
-      title: 'Balance',
-      dataIndex: 'credit',
-      render: (amount) => moneyRowFormatter({ amount }),
-    },
-    {
       title: 'Status',
       dataIndex: 'status',
       render: (status) => {
-        let color = status === 'draft' ? 'cyan' : status === 'sent' ? 'magenta' : 'gold';
+        let color = status === 'requisition' ? 'cyan' : status === 'quotation' ? 'magenta' : 'gold';
 
         return <Tag color={color}>{status && status.toUpperCase()}</Tag>;
-      },
-    },
-    {
-      title: 'Payment',
-      dataIndex: 'paymentStatus',
-      render: (paymentStatus) => {
-        let color =
-          paymentStatus === 'unpaid'
-            ? 'volcano'
-            : paymentStatus === 'paid'
-            ? 'green'
-            : paymentStatus === 'overdue'
-            ? 'red'
-            : 'purple';
-
-        return <Tag color={color}>{paymentStatus && paymentStatus.toUpperCase()}</Tag>;
       },
     },
   ];

@@ -33,7 +33,7 @@ const employeeSchema = new mongoose.Schema({
   },
   photo: {
     type: String,
-    trim: true,
+    trim: false,
   },
   department: {
     type: String,

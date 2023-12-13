@@ -59,7 +59,7 @@ html
       }
       h1.invoice{
         font-size:32px;
-        color:#52008c;
+        color:#004d00;
         margin-top:0;
       }
       p.strong{
@@ -204,7 +204,7 @@ html
       .table-invoice th {
         padding: 8px 10px;
         border-bottom: 1px solid #c2e0f2;
-        color:#52008c;
+        color:#004d00;
         white-space: nowrap;
         font-weight: 700;
         font-size: 12px;
@@ -260,17 +260,18 @@ html
     
       header.clearfix
         .top-area
-          img.logo.left(src=" https://www.idurarweb.com/Theme/idurarweb-theme/assets/img/creation-de-site-web-algerie.png")
+          img.logo.left(src="https://irp.cdn-website.com/26d142d0/MOBILE/jpg/667.jpg")
           .right.company-info
-              p IDURAR WEB Agency
-              p Centre d’affaire Gold Tower Oran - Algerie
-              p RC: 16A5234245 /NIF: 198232345630567 /AI: 31009451343
+              p MARIN INTERNATIONAL
+              p Privada del Sur 12, #7-1, Colonia Centro, Orizaba, Veracruz, C.P. 94300
+              p 272-725-7700 || 272-726-2434
+              p informacion@marin-international.com
               
         .col.col-24
           .space  
         .left.col-12
             h1.invoice
-              | INVOICE 
+              | QUOTE 
             div 
               .col.col-8
                 p.strong Date :
@@ -284,9 +285,8 @@ html
               
         .right.col-10
             .billTo
-                p Bill To :
-                p #{model.client.company}
-                p address : #{model.client.address}
+                p Bill To : #{model.client.branch.branchName}
+                p address : #{model.client.branch.address}
                 p phone : #{model.client.phone}
                 p Tel : #{model.client.email}
         .col.col-24
