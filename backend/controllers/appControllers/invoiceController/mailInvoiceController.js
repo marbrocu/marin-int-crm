@@ -98,7 +98,7 @@ const sendViaApi = async (email, name, filePath) => {
 
   // Send the mail using the send method
   const data = await resend.emails.send({
-    from: 'informacion@marininternational.com',
+    from: 'examplemail@gmail.com',
     to: email,
     subject: 'Invoice From Idurar',
     attachments: [

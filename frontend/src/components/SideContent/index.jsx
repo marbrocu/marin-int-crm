@@ -43,25 +43,25 @@ export default function SideContent() {
         <div className="space10"></div>
         <ul className="list-checked">
           <Text>
-            MARIN INTERNATIONAL, INC.
+            MARININC
             <br />
-            2228 Sandshell Street, Bedford, Tx 76021, U.S.A
+            ---------------------------------
             <br />
-            469-875-2123
+            ---------------------------------
             <br />
-            pily@marin-international.com
+            ---------------------------------
           </Text>
           <Divider style={greenLineStyle} />
           <Text>
-            MARIN INTERNATIONAL
+            MARININC
             <br />
-            Privada del Sur 12 / #7-1 Colonia Centro, Orizaba, Ver. C.P. 94300
+            ---------------------------------
             <br />
-            272-725-7700
+            ---------------------------------
             <br />
-            272-726-2434
+            ---------------------------------
             <br />
-            informacion@marin-international.com
+            ---------------------------------
           </Text>
         </ul>
         <Divider />
@@ -69,7 +69,7 @@ export default function SideContent() {
         <Button
           type="primary"
           style={buttonStyles}
-          href="https://www.facebook.com/marin.international.inc"
+          href="https://www.facebook.com"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -80,7 +80,7 @@ export default function SideContent() {
         <Button
           type="primary"
           style={{...buttonStyles, backgroundColor: '#25D366', borderColor: '#25D366'}}
-          href="https://api.whatsapp.com/send/?phone=5212225658045&text=%C2%A1Hola%21+Vi+tu+sitio+web+y+estoy+interesado+en+saber+m%C3%A1s.+%C2%BFMe+podr%C3%ADas+proporcionar+m%C3%A1s+informaci%C3%B3n+sobre+tus+servicios%3F&type=phone_number&app_absent=0"
+          href="https://www.facebook.com"
           target="_blank"
           rel="noopener noreferrer"
         >

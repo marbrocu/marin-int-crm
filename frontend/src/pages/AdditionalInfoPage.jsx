@@ -35,18 +35,9 @@ const EquipmentGrid = ({ equipmentItems }) => {
 const ExperienceParagraph = () => (
     <Paragraph>
       <ul style={{ columns: 2, listStyleType: 'none', paddingInlineStart: '0' }}>
-        <li>Since 1980 working in the pulp & paper industry.</li>
-        <li>Offices in the main areas of paper plants.</li>
         <li>Extensive experience in sales and customer service.</li>
         <li>Self-confidence and level of competitiveness.</li>
         <li>The best response times.</li>
-        <li>Total knowledge of Andritz equipment.</li>
-        <li>Direct technical support from Andritz.</li>
-        <li>Technicians highly competent in the pulp & paper industry.</li>
-        <li>Excellent knowledge of people working in the pulp & paper industry and owners.</li>
-        <li>Knowledge of the Mexican and International pulp & paper market.</li>
-        <li>Excellent communication.</li>
-        <li>We know who our competition is.</li>
       </ul>
     </Paragraph>
   );
@@ -61,19 +52,6 @@ const AdditionalInfoPage = () => {
         'Rejects handling systems',
         'Garbage handling pumps',
         'Conventional and drum hydrapulpers',
-        'Raggers',
-        'Pressurized screens',
-        'Disc filter thickeners',
-        'Screw presses',
-        'Pulp and water pumps',
-        'Motors',
-        'Drum pulpers',
-        'De-trashing systems',
-        'Drum thickeners',
-        'High and low consistency cleaners',
-        'Wet Lap systems',
-        'Vacuum pumps',
-        'Valves and instrumentation',
       ];
 
     
@@ -88,11 +66,8 @@ const AdditionalInfoPage = () => {
       >
         <Title level={2} style={{ color: '#3b7d2e' }}>Do you want to make better paper?</Title>
         <Paragraph>
-          Marin International offers machinery and spare parts for your stock preparation systems,
-          new and rebuilt with warranty, as well as complete paper machines, parts, and spare parts
-          for paper manufacturing lines. We also offer reconstruction and upgrades for your
-          preparation systems and equipment of stock preparation systems and paper machine, at
-          competitive prices and of excellent quality.
+          MarinI offers machinery and spare parts for your stock preparation systems,
+          new and rebuilt with warranty.
         </Paragraph>
         <Divider />
 
@@ -111,12 +86,8 @@ const AdditionalInfoPage = () => {
 
         <Title level={2} style={{ color: '#3b7d2e' }}>About Us</Title>
         <Paragraph>
-          Marin International offers you the best option in the selection of your equipment, since
-          we have more than 30 years of experience as a supplier to the Pulp and Paper Industry.
-          Whatever your company requires in terms of advice, machinery, equipment, and spare parts,
-          Marin International puts it at your fingertips with the best technology and in your
-          language. We have enough experience in the paper industry to provide you with a high
-          quality and efficient service.
+          MarinI offers you the best option in the selection of your equipment, since
+          we have more than 30 years of experience as a supplier.
         </Paragraph>
         <Divider style={{ borderColor: '#3b7d2e' }} />
 

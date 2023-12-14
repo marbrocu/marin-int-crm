@@ -49,8 +49,8 @@ const RegisterPage = () => {
             >
               <Title level={3}>Not currently taking sign ups</Title>
               <Title level={3}>Sign in or contact us at:</Title>
-              <Title level={5}>informacion@marin-international.com</Title>
-              <Title level={5}>272-725-7700</Title>
+              <Title level={5}>------------</Title>
+              <Title level={5}>------------</Title>
               <Form.Item>
                 Or <a href="/login">already have account? Login</a>
               </Form.Item>
