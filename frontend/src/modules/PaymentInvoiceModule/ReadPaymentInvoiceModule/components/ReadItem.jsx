@@ -189,6 +189,7 @@ export default function ReadItem({ config, selectedItem }) {
         <Descriptions.Item label="Address">{currentErp.client.branch.address}</Descriptions.Item>
         <Descriptions.Item label="E-mail">{currentErp.client.email}</Descriptions.Item>
         <Descriptions.Item label="Phone">{currentErp.client.phone}</Descriptions.Item>
+        <Descriptions.Item label="Payment File">{currentErp.paymentfile}</Descriptions.Item>
       </Descriptions>
       <Divider />
       <Row>

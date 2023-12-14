@@ -17,6 +17,10 @@ const paymentInvoiceSchema = new mongoose.Schema({
     autopopulate: true,
     required: true,
   },
+  paymentfile: {
+    type: String,
+    required: false,
+  },
   invoice: {
     type: mongoose.Schema.ObjectId,
     ref: 'Confirmation',

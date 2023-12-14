@@ -14,7 +14,7 @@ async function setupApp() {
       email: 'admin@demo.com',
       password: passwordHash,
       name: 'Marco',
-      surname: 'Brown',
+      surname: 'B',
       role: 'admin',
     }).save();
 

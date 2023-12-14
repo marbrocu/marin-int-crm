@@ -67,6 +67,25 @@ export default function PaymentInvoiceForm({ maxAmount = null, isUpdateForm = fa
           redirectLabel="Add Payment Mode"
         ></SelectAsync>
       </Form.Item>
+      <Form.Item
+            label="URL Payment"
+            name="paymentfile"
+            rules={[
+              {
+                required: true,
+                message: 'Please input a URL for the payment file!',
+              },
+              {
+                type: 'string', // Define the type of input expected
+                pattern: new RegExp(
+                  '^(https?://)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.([a-z]+)?$'
+                ), // Define the regular expression for URL validation
+                message: 'Please enter a valid URL', // Error message to display if the URL is invalid
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
       <Form.Item label="Reference" name="ref">
         <Input />
       </Form.Item>
